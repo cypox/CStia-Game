@@ -1947,7 +1947,7 @@ public class SpellEffect {
 	private void applyEffect_672(final ArrayList<Fighter> cibles, final Fight fight) {
 		final double val = Formulas.getRandomJet(this.jet) / 100.0;
 		final int pdvMax = this.caster.getPdvMaxOutFight();
-		final double pVie = this.caster.getPdv() / this.caster.getPdvMax();
+		final double pVie = (double) this.caster.getPdv() / (double) this.caster.getPdvMax();
 		final double rad = 6.283185307179586 * (pVie - 0.5);
 		final double cos = Math.cos(rad);
 		final double taux = Math.pow(cos + 1.0, 2.0) / 4.0;
