@@ -303,6 +303,11 @@ public class Object {
 			}
 			//*/
 			stats.append(getTemplate().getStrTemplate());
+			return stats.toString();
+		}
+		if ( guid == 8993 ) {
+			// TODO: Epee Maudite add spells to the sword
+			//stats.append(getTemplate().getStrTemplate());
 		}
 		for (final SpellEffect SE : this.Effects) {
 			if (!isFirst) {
