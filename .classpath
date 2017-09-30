@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/commons-cli-1.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/config-1.2.1.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/easymock-2.5.2.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/easymockclassextension-2.5.2.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/HikariCP-2.3.2.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/jansi-1.11.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/javassist-3.18.2-GA.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/jep.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/jmock-1.2.0.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/joda-time-2.6.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/logback-classic-1.1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/logback-core-1.1.2.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/mariadb-java-client-1.1.8.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/mina-core-2.0.9.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/objenesis-2.1.jar"/>
+	<classpathentry kind="lib" path="D:/Dofus-Emu/1.29/Aestia 1.29/scr/Aestia_Game_lib/slf4j-api-1.7.9.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
