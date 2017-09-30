@@ -22,9 +22,9 @@ public class GlobalManager {
 
 	public static void loadWorldScheduler() {
 		new WorldMoveEntity().launch();
-		new WorldPub().launch();
+		//new WorldPub().launch();
 		new WorldSave().launch();
-		new WorldVote().launch();
+		//new WorldVote().launch();
 	}
 
 }
