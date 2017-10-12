@@ -49,12 +49,12 @@ public class Config {
 		Main.exchangePort = 451;
 		Main.exchangeIp = "127.0.0.1";
 		Main.loginHostDB = "127.0.0.1";
-		Main.loginNameDB = "dofus_game";
+		Main.loginNameDB = "cstia_game";
 		Main.loginUserDB = "root";
 		Main.loginPassDB = "Dexath";
 		Main.gamePort = 5555;
 		Main.hostDB = "127.0.0.1";
-		Main.nameDB = "dofus_realm";
+		Main.nameDB = "cstia_other";
 		Main.userDB = "root";
 		Main.passDB = "Dexath";
 		Main.Ip = "127.0.0.1";
