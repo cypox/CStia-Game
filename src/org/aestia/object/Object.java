@@ -150,7 +150,7 @@ public class Object {
 								this.SortStats.add(spell);
 							} else if (id != 814 && id != 812
 									&& !stats[3].equals("") && (!stats[3].equals("0") || id == 808 || id == 800
-											|| id == 806 || id == 940 || id == 807)
+									|| id == 806 || id == 940 || id == 807)
 									&& (this.getTemplate().getType() != 77 || id != 808)) {
 								this.txtStats.put(id, stats[3]);
 							} else if (id == 812 && this.getTemplate().getType() == 93) {
@@ -279,7 +279,7 @@ public class Object {
 	public String parseItem() {
 		final String posi = (this.position == -1) ? "" : Integer.toHexString(this.position);
 		return String.valueOf(Integer.toHexString(this.guid)) + "~" + Integer.toHexString(this.template.getId()) + "~"
-				+ Integer.toHexString(this.quantity) + "~" + posi + "~" + this.parseStatsString() + ";";
+		+ Integer.toHexString(this.quantity) + "~" + posi + "~" + this.parseStatsString() + ";";
 	}
 
 	public String parseStatsString() {
@@ -303,6 +303,27 @@ public class Object {
 			}
 			//*/
 			stats.append(getTemplate().getStrTemplate());
+			if ( this.Stats.getMap().entrySet().size() != 0 )
+				stats.append(',');
+			for (final Map.Entry<Integer, Integer> entry2 : this.Stats.getMap().entrySet()) {
+				final int statID = entry2.getKey();
+				if (statID == 970 || statID == 971 || statID == 972 || statID == 973 || statID == 974) {
+					final int jet2 = entry2.getValue();
+					if (statID == 974 || statID == 972 || statID == 970) {
+						stats.append(',');
+						stats.append(Integer.toHexString(statID)).append("#0#0#").append(Integer.toHexString(jet2));
+					} else {
+						stats.append(',');
+						stats.append(Integer.toHexString(statID)).append("#0#0#").append(jet2);
+					}
+					if (statID == 973) {
+						this.setObvijevanPos(jet2);
+					}
+					if (statID == 972) {
+						this.setObvijevanLook(jet2);
+					}
+				}
+			}
 			return stats.toString();
 		}
 		if ( guid == 8993 ) {
@@ -318,12 +339,12 @@ public class Object {
 				switch (SE.getEffectID()) {
 				case 614: {
 					stats.append(Integer.toHexString(SE.getEffectID())).append("#0#0#").append(infos[0]).append("#")
-							.append(infos[5]);
+					.append(infos[5]);
 					break;
 				}
 				default: {
 					stats.append(Integer.toHexString(SE.getEffectID())).append("#").append(infos[0]).append("#")
-							.append(infos[1]).append("#").append(infos[1]).append("#").append(infos[5]);
+					.append(infos[1]).append("#").append(infos[1]).append("#").append(infos[5]);
 					break;
 				}
 				}
@@ -340,15 +361,15 @@ public class Object {
 			if (this.template.getType() == 77 || this.template.getType() == 90) {
 				if (entry.getKey() == 800) {
 					stats.append(Integer.toHexString(entry.getKey())).append("#").append(entry.getValue()).append("#0#")
-							.append(entry.getValue());
+					.append(entry.getValue());
 				}
 				if (entry.getKey() == 940) {
 					stats.append(Integer.toHexString(entry.getKey())).append("#").append(entry.getValue()).append("#0#")
-							.append(entry.getValue());
+					.append(entry.getValue());
 				}
 				if (entry.getKey() == 807) {
 					stats.append(Integer.toHexString(entry.getKey())).append("#").append(entry.getValue()).append("#0#")
-							.append(entry.getValue());
+					.append(entry.getValue());
 				}
 				if (entry.getKey() == 806) {
 					int corpu = 0;
@@ -365,14 +386,14 @@ public class Object {
 						corpu = 7;
 					}
 					stats.append(Integer.toHexString(entry.getKey())).append("#").append(Integer.toHexString(corpu))
-							.append("#" + ((corpulence > 0) ? corpu : 0) + "#").append(Integer.toHexString(corpu));
+					.append("#" + ((corpulence > 0) ? corpu : 0) + "#").append(Integer.toHexString(corpu));
 				}
 				if (entry.getKey() == 808 && this.template.getType() == 77) {
 					if (entry.getValue().contains("#")) {
 						stats.append(Integer.toHexString(entry.getKey())).append(entry.getValue());
 					} else {
 						stats.append(Integer.toHexString(entry.getKey()))
-								.append(Formulas.convertToDate(Long.parseLong(entry.getValue())));
+						.append(Formulas.convertToDate(Long.parseLong(entry.getValue())));
 					}
 				}
 			} else if (entry.getKey() == 985 || entry.getKey() == 989) {
@@ -393,11 +414,11 @@ public class Object {
 					final String date = item.split("#")[3];
 					if (date != null && !date.equalsIgnoreCase("")) {
 						stats.append(Integer.toHexString(entry.getKey()))
-								.append(Formulas.convertToDate(Long.parseLong(date)));
+						.append(Formulas.convertToDate(Long.parseLong(date)));
 					}
 				} else {
 					stats.append(Integer.toHexString(entry.getKey()))
-							.append(Formulas.convertToDate(Long.parseLong(item)));
+					.append(Formulas.convertToDate(Long.parseLong(item)));
 				}
 			} else if (entry.getKey() == 623) {
 				stats.append(Integer.toHexString(entry.getKey())).append("#0#0#").append(entry.getValue());
@@ -420,38 +441,38 @@ public class Object {
 				} else {
 					if (entry.getKey() == 800) {
 						stats.append(Integer.toHexString(entry.getKey())).append("#")
-								.append(Integer.toHexString(p.getPdv())).append("#0#")
-								.append(Integer.toHexString(p.getPdv()));
+						.append(Integer.toHexString(p.getPdv())).append("#0#")
+						.append(Integer.toHexString(p.getPdv()));
 					}
 					if (entry.getKey() == 806) {
 						stats.append(Integer.toHexString(entry.getKey())).append("#")
-								.append(Integer.toString(p.parseCorpulence()))
-								.append("#" + ((p.getCorpulence() > 0) ? p.parseCorpulence() : 0) + "#")
-								.append(Integer.toString(p.parseCorpulence()));
+						.append(Integer.toString(p.parseCorpulence()))
+						.append("#" + ((p.getCorpulence() > 0) ? p.parseCorpulence() : 0) + "#")
+						.append(Integer.toString(p.parseCorpulence()));
 					}
 					if (entry.getKey() == 808) {
 						stats.append(Integer.toHexString(entry.getKey())).append(p.parseLastEatDate());
 					}
 					if (entry.getKey() == 807) {
 						stats.append(Integer.toHexString(entry.getKey())).append("#").append(entry.getValue())
-								.append("#0#").append(entry.getValue());
+						.append("#0#").append(entry.getValue());
 					}
 					if (p.getIsEupeoh() && entry.getKey() == 940) {
 						stats.append(Integer.toHexString(entry.getKey())).append("#")
-								.append(Integer.toHexString(p.getIsEupeoh() ? 1 : 0)).append("#0#")
-								.append(Integer.toHexString(p.getIsEupeoh() ? 1 : 0));
+						.append(Integer.toHexString(p.getIsEupeoh() ? 1 : 0)).append("#0#")
+						.append(Integer.toHexString(p.getIsEupeoh() ? 1 : 0));
 					}
 				}
 			} else if (entry.getKey() == 812 && this.getTemplate().getType() == 93) {
 				stats.append(Integer.toHexString(entry.getKey())).append("#")
-						.append(Integer.toHexString(this.getResistanceMax(this.getTemplate().getStrTemplate())))
-						.append("#").append(entry.getValue()).append("#")
-						.append(Integer.toHexString(this.getResistanceMax(this.getTemplate().getStrTemplate())));
+				.append(Integer.toHexString(this.getResistanceMax(this.getTemplate().getStrTemplate())))
+				.append("#").append(entry.getValue()).append("#")
+				.append(Integer.toHexString(this.getResistanceMax(this.getTemplate().getStrTemplate())));
 			} else if (entry.getKey() == 812) {
 				stats.append(Integer.toHexString(entry.getKey())).append("#")
-						.append(Integer.toHexString(this.getResistanceMax(this.getTemplate().getStrTemplate())))
-						.append("#").append(entry.getValue()).append("#")
-						.append(Integer.toHexString(this.getResistanceMax(this.getTemplate().getStrTemplate())));
+				.append(Integer.toHexString(this.getResistanceMax(this.getTemplate().getStrTemplate())))
+				.append("#").append(entry.getValue()).append("#")
+				.append(Integer.toHexString(this.getResistanceMax(this.getTemplate().getStrTemplate())));
 			} else {
 				stats.append(Integer.toHexString(entry.getKey())).append("#0#0#0#").append(entry.getValue());
 			}
@@ -463,11 +484,11 @@ public class Object {
 			}
 			if (this.getTemplate().getType() == 18) {
 				stats.append(Integer.toHexString(717)).append("#").append(Integer.toHexString(entry2.getKey()))
-						.append("#").append("0").append("#").append(Integer.toHexString(entry2.getValue()));
+				.append("#").append("0").append("#").append(Integer.toHexString(entry2.getValue()));
 			}
 			if (entry2.getKey() == 962) {
 				stats.append(Integer.toHexString(962)).append("#").append(Integer.toHexString(entry2.getKey()))
-						.append("#").append("0").append("#").append(Integer.toHexString(entry2.getValue()));
+				.append("#").append("0").append("#").append(Integer.toHexString(entry2.getValue()));
 			}
 			isFirst = false;
 		}
@@ -484,7 +505,7 @@ public class Object {
 							stats.append(",");
 						}
 						stats.append(mod[0]).append("#").append(mod[1]).append("#0#").append(mod[3]).append("#")
-								.append(jet);
+						.append(jet);
 						isFirst = false;
 					}
 				}
@@ -525,12 +546,17 @@ public class Object {
 			return this.getTemplate().getStrTemplate();
 		}
 		final StringBuilder stats = new StringBuilder();
+		if ((this.getTemplate().getPanoId() >= 81 && this.getTemplate().getPanoId() <= 92)
+				|| (this.getTemplate().getPanoId() >= 201 && this.getTemplate().getPanoId() <= 212)) {
+			stats.append(getTemplate().getStrTemplate());
+			return stats.toString();
+		}
 		boolean isFirst = true;
 		if (this instanceof Fragment) {
 			final Fragment fragment = (Fragment) this;
 			for (final World.Couple<Integer, Integer> couple : fragment.getRunes()) {
 				stats.append(stats.toString().isEmpty() ? ((Integer) couple.first) : (";" + couple.first)).append(":")
-						.append(couple.second);
+				.append(couple.second);
 			}
 			return stats.toString();
 		}
@@ -541,18 +567,18 @@ public class Object {
 			if (this.template.getType() == 77) {
 				if (entry.getKey() == 800) {
 					stats.append(Integer.toHexString(entry.getKey())).append("#").append(entry.getValue()).append("#0#")
-							.append(entry.getValue());
+					.append(entry.getValue());
 				}
 				if (entry.getKey() == 806) {
 					stats.append(Integer.toHexString(entry.getKey())).append("#").append(entry.getValue())
-							.append("#" + entry.getValue() + "#").append(entry.getValue());
+					.append("#" + entry.getValue() + "#").append(entry.getValue());
 				}
 				if (entry.getKey() == 808) {
 					if (entry.getValue().contains("#")) {
 						stats.append(Integer.toHexString(entry.getKey())).append(entry.getValue());
 					} else {
 						stats.append(Integer.toHexString(entry.getKey()))
-								.append(Formulas.convertToDate(Long.parseLong(entry.getValue())));
+						.append(Formulas.convertToDate(Long.parseLong(entry.getValue())));
 					}
 				}
 			} else if (entry.getKey() == 805) {
@@ -560,7 +586,7 @@ public class Object {
 					stats.append(Integer.toHexString(entry.getKey())).append(entry.getValue());
 				} else {
 					stats.append(Integer.toHexString(entry.getKey())).append("#0#0#")
-							.append(Long.parseLong(entry.getValue()));
+					.append(Long.parseLong(entry.getValue()));
 				}
 			} else if (entry.getKey() == 985 || entry.getKey() == 989) {
 				stats.append(Integer.toHexString(entry.getKey())).append("#0#0#0#").append(entry.getValue());
@@ -587,22 +613,22 @@ public class Object {
 				} else {
 					if (entry.getKey() == 800) {
 						stats.append(Integer.toHexString(entry.getKey())).append("#")
-								.append(Integer.toHexString(p.getPdv())).append("#0#")
-								.append(Integer.toHexString(p.getPdv()));
+						.append(Integer.toHexString(p.getPdv())).append("#0#")
+						.append(Integer.toHexString(p.getPdv()));
 					}
 					if (entry.getKey() == 806) {
 						stats.append(Integer.toHexString(entry.getKey())).append("#")
-								.append(Integer.toString(p.parseCorpulence()))
-								.append("#" + ((p.getCorpulence() > 0) ? p.parseCorpulence() : 0) + "#")
-								.append(Integer.toString(p.parseCorpulence()));
+						.append(Integer.toString(p.parseCorpulence()))
+						.append("#" + ((p.getCorpulence() > 0) ? p.parseCorpulence() : 0) + "#")
+						.append(Integer.toString(p.parseCorpulence()));
 					}
 					if (entry.getKey() == 808) {
 						stats.append(Integer.toHexString(entry.getKey())).append(p.parseLastEatDate());
 					}
 					if (p.getIsEupeoh() && entry.getKey() == 940) {
 						stats.append(Integer.toHexString(entry.getKey())).append("#")
-								.append(Integer.toHexString(p.getIsEupeoh() ? 1 : 0)).append("#0#")
-								.append(Integer.toHexString(p.getIsEupeoh() ? 1 : 0));
+						.append(Integer.toHexString(p.getIsEupeoh() ? 1 : 0)).append("#0#")
+						.append(Integer.toHexString(p.getIsEupeoh() ? 1 : 0));
 					}
 				}
 			} else {
@@ -617,7 +643,7 @@ public class Object {
 			final String[] infos = SE.getArgs().split(";");
 			try {
 				stats.append(Integer.toHexString(SE.getEffectID())).append("#").append(infos[0]).append("#")
-						.append(infos[1]).append("#0#").append(infos[5]);
+				.append(infos[1]).append("#0#").append(infos[5]);
 			} catch (Exception e) {
 				e.printStackTrace();
 				continue;
@@ -629,7 +655,7 @@ public class Object {
 				stats.append(",");
 			}
 			stats.append(Integer.toHexString(717)).append("#").append(Integer.toHexString(entry2.getKey())).append("#")
-					.append("0").append("#").append(Integer.toHexString(entry2.getValue()));
+			.append("0").append("#").append(Integer.toHexString(entry2.getValue()));
 			isFirst = false;
 		}
 		for (final Map.Entry<Integer, Integer> entry2 : this.Stats.getMap().entrySet()) {
@@ -638,7 +664,7 @@ public class Object {
 			}
 			final String jet = "0d0+" + entry2.getValue();
 			stats.append(Integer.toHexString(entry2.getKey())).append("#")
-					.append(Integer.toHexString(entry2.getValue()));
+			.append(Integer.toHexString(entry2.getValue()));
 			stats.append("#0#0#").append(jet);
 			isFirst = false;
 		}
@@ -820,7 +846,7 @@ public class Object {
 				stats = String.valueOf(stats) + ",";
 			}
 			stats = String.valueOf(stats) + Integer.toHexString(entry.getKey()) + "#" + Integer.toHexString(newstats)
-					+ "#0#0#" + jet;
+			+ "#0#0#" + jet;
 			isFirst = false;
 		}
 		for (final Map.Entry<Integer, String> entry2 : obj.txtStats.entrySet()) {
