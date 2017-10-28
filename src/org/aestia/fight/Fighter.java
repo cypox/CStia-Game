@@ -635,6 +635,7 @@ public class Fighter implements Comparable<Fighter> {
 					+ " duration: " + duration + " turns: " + turns + " debuff: " + debuff + " spellid: " + spellID
 					+ " args: " + args + " !", Console.Color.INFORMATION);
 		}
+		//perso.getBuffsStats().addOneStat(id, val); getBuffsStats creates new vector and does not affect actual buff list
 		switch (id) {
 		case 106: {
 			SocketManager.GAME_SEND_FIGHT_GIE_TO_FIGHT(this.fight, 7, id, this.getId(), -1,

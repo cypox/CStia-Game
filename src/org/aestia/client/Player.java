@@ -2269,6 +2269,8 @@ public class Player {
 		.append(String.valueOf(this._deshonor) + ",").append(this._showWings ? "1" : "0").append("|");
 		int pdv = this.curPdv;
 		int pdvMax = this.maxPdv;
+		Stats buffStats = this.getBuffsStats();
+		Stats stuffStats = this.getStuffStats();
 		if (this._fight != null) {
 			final Fighter f = this._fight.getFighterByPerso(this);
 			if (f != null) {
@@ -2280,135 +2282,135 @@ public class Player {
 		ASData.append(pdv).append(",").append(pdvMax).append("|");
 		ASData.append(this.getEnergy()).append(",10000|");
 		ASData.append(this.getInitiative()).append("|");
-		ASData.append(stats.getEffect(176) + this.getStuffStats().getEffect(176)
+		ASData.append(stats.getEffect(176) + stuffStats.getEffect(176)
 				+ (int) Math.ceil(this.getTotalStats().getEffect(123) / 10) + this.getBuffsStats().getEffect(176))
 		.append("|");
-		ASData.append(stats.getEffect(111)).append(",").append(this.getStuffStats().getEffect(111)).append(",")
-		.append(this.getDonsStats().getEffect(111)).append(",").append(this.getBuffsStats().getEffect(111))
+		ASData.append(stats.getEffect(111)).append(",").append(stuffStats.getEffect(111)).append(",")
+		.append(this.getDonsStats().getEffect(111)).append(",").append(buffStats.getEffect(111))
 		.append(",").append(this.getTotalStats().getEffect(111)).append("|");
-		ASData.append(stats.getEffect(128)).append(",").append(this.getStuffStats().getEffect(128)).append(",")
-		.append(this.getDonsStats().getEffect(128)).append(",").append(this.getBuffsStats().getEffect(128))
+		ASData.append(stats.getEffect(128)).append(",").append(stuffStats.getEffect(128)).append(",")
+		.append(this.getDonsStats().getEffect(128)).append(",").append(buffStats.getEffect(128))
 		.append(",").append(this.getTotalStats().getEffect(128)).append("|");
-		ASData.append(stats.getEffect(118)).append(",").append(this.getStuffStats().getEffect(118)).append(",")
-		.append(this.getDonsStats().getEffect(118)).append(",").append(this.getBuffsStats().getEffect(118))
+		ASData.append(stats.getEffect(118)).append(",").append(stuffStats.getEffect(118)).append(",")
+		.append(this.getDonsStats().getEffect(118)).append(",").append(buffStats.getEffect(118))
 		.append("|");
-		ASData.append(stats.getEffect(125)).append(",").append(this.getStuffStats().getEffect(125)).append(",")
-		.append(this.getDonsStats().getEffect(125)).append(",").append(this.getBuffsStats().getEffect(125))
+		ASData.append(stats.getEffect(125)).append(",").append(stuffStats.getEffect(125)).append(",")
+		.append(this.getDonsStats().getEffect(125)).append(",").append(buffStats.getEffect(125))
 		.append("|");
-		ASData.append(stats.getEffect(124)).append(",").append(this.getStuffStats().getEffect(124)).append(",")
-		.append(this.getDonsStats().getEffect(124)).append(",").append(this.getBuffsStats().getEffect(124))
+		ASData.append(stats.getEffect(124)).append(",").append(stuffStats.getEffect(124)).append(",")
+		.append(this.getDonsStats().getEffect(124)).append(",").append(buffStats.getEffect(124))
 		.append("|");
-		ASData.append(stats.getEffect(123)).append(",").append(this.getStuffStats().getEffect(123)).append(",")
-		.append(this.getDonsStats().getEffect(123)).append(",").append(this.getBuffsStats().getEffect(123))
+		ASData.append(stats.getEffect(123)).append(",").append(stuffStats.getEffect(123)).append(",")
+		.append(this.getDonsStats().getEffect(123)).append(",").append(buffStats.getEffect(123))
 		.append("|");
-		ASData.append(stats.getEffect(119)).append(",").append(this.getStuffStats().getEffect(119)).append(",")
-		.append(this.getDonsStats().getEffect(119)).append(",").append(this.getBuffsStats().getEffect(119))
+		ASData.append(stats.getEffect(119)).append(",").append(stuffStats.getEffect(119)).append(",")
+		.append(this.getDonsStats().getEffect(119)).append(",").append(buffStats.getEffect(119))
 		.append("|");
-		ASData.append(stats.getEffect(126)).append(",").append(this.getStuffStats().getEffect(126)).append(",")
-		.append(this.getDonsStats().getEffect(126)).append(",").append(this.getBuffsStats().getEffect(126))
+		ASData.append(stats.getEffect(126)).append(",").append(stuffStats.getEffect(126)).append(",")
+		.append(this.getDonsStats().getEffect(126)).append(",").append(buffStats.getEffect(126))
 		.append("|");
-		ASData.append(stats.getEffect(117)).append(",").append(this.getStuffStats().getEffect(117)).append(",")
-		.append(this.getDonsStats().getEffect(117)).append(",").append(this.getBuffsStats().getEffect(117))
+		ASData.append(stats.getEffect(117)).append(",").append(stuffStats.getEffect(117)).append(",")
+		.append(this.getDonsStats().getEffect(117)).append(",").append(buffStats.getEffect(117))
 		.append("|");
-		ASData.append(stats.getEffect(182)).append(",").append(this.getStuffStats().getEffect(182)).append(",")
-		.append(this.getDonsStats().getEffect(182)).append(",").append(this.getBuffsStats().getEffect(182))
+		ASData.append(stats.getEffect(182)).append(",").append(stuffStats.getEffect(182)).append(",")
+		.append(this.getDonsStats().getEffect(182)).append(",").append(buffStats.getEffect(182))
 		.append("|");
-		ASData.append(stats.getEffect(112)).append(",").append(this.getStuffStats().getEffect(112)).append(",")
-		.append(this.getDonsStats().getEffect(112)).append(",").append(this.getBuffsStats().getEffect(112))
+		ASData.append(stats.getEffect(112)).append(",").append(stuffStats.getEffect(112)).append(",")
+		.append(this.getDonsStats().getEffect(112)).append(",").append(buffStats.getEffect(112))
 		.append("|");
-		ASData.append(stats.getEffect(142)).append(",").append(this.getStuffStats().getEffect(142)).append(",")
-		.append(this.getDonsStats().getEffect(142)).append(",").append(this.getBuffsStats().getEffect(142))
+		ASData.append(stats.getEffect(142)).append(",").append(stuffStats.getEffect(142)).append(",")
+		.append(this.getDonsStats().getEffect(142)).append(",").append(buffStats.getEffect(142))
 		.append("|");
-		ASData.append(stats.getEffect(165)).append(",").append(this.getStuffStats().getEffect(165)).append(",")
-		.append(this.getDonsStats().getEffect(165)).append(",").append(this.getBuffsStats().getEffect(165))
+		ASData.append(stats.getEffect(165)).append(",").append(stuffStats.getEffect(165)).append(",")
+		.append(this.getDonsStats().getEffect(165)).append(",").append(buffStats.getEffect(165))
 		.append("|");
-		ASData.append(stats.getEffect(138)).append(",").append(this.getStuffStats().getEffect(138))
+		ASData.append(stats.getEffect(138)).append(",").append(stuffStats.getEffect(138))
 		.append("," + this.getDonsStats().getEffect(138)).append(",")
-		.append(this.getBuffsStats().getEffect(138)).append("|");
-		ASData.append(stats.getEffect(178)).append(",").append(this.getStuffStats().getEffect(178)).append(",")
-		.append(this.getDonsStats().getEffect(178)).append(",").append(this.getBuffsStats().getEffect(178))
+		.append(buffStats.getEffect(138)).append("|");
+		ASData.append(stats.getEffect(178)).append(",").append(stuffStats.getEffect(178)).append(",")
+		.append(this.getDonsStats().getEffect(178)).append(",").append(buffStats.getEffect(178))
 		.append("|");
-		ASData.append(stats.getEffect(225)).append(",").append(this.getStuffStats().getEffect(225)).append(",")
-		.append(this.getDonsStats().getEffect(225)).append(",").append(this.getBuffsStats().getEffect(225))
+		ASData.append(stats.getEffect(225)).append(",").append(stuffStats.getEffect(225)).append(",")
+		.append(this.getDonsStats().getEffect(225)).append(",").append(buffStats.getEffect(225))
 		.append("|");
-		ASData.append(stats.getEffect(226)).append(",").append(this.getStuffStats().getEffect(226)).append(",")
-		.append(this.getDonsStats().getEffect(226)).append(",").append(this.getBuffsStats().getEffect(226))
+		ASData.append(stats.getEffect(226)).append(",").append(stuffStats.getEffect(226)).append(",")
+		.append(this.getDonsStats().getEffect(226)).append(",").append(buffStats.getEffect(226))
 		.append("|");
-		ASData.append(stats.getEffect(220)).append(",").append(this.getStuffStats().getEffect(220)).append(",")
-		.append(this.getDonsStats().getEffect(220)).append(",").append(this.getBuffsStats().getEffect(220))
+		ASData.append(stats.getEffect(220)).append(",").append(stuffStats.getEffect(220)).append(",")
+		.append(this.getDonsStats().getEffect(220)).append(",").append(buffStats.getEffect(220))
 		.append("|");
-		ASData.append(stats.getEffect(115)).append(",").append(this.getStuffStats().getEffect(115)).append(",")
-		.append(this.getDonsStats().getEffect(115)).append(",").append(this.getBuffsStats().getEffect(115))
+		ASData.append(stats.getEffect(115)).append(",").append(stuffStats.getEffect(115)).append(",")
+		.append(this.getDonsStats().getEffect(115)).append(",").append(buffStats.getEffect(115))
 		.append("|");
-		ASData.append(stats.getEffect(122)).append(",").append(this.getStuffStats().getEffect(122)).append(",")
-		.append(this.getDonsStats().getEffect(122)).append(",").append(this.getBuffsStats().getEffect(122))
+		ASData.append(stats.getEffect(122)).append(",").append(stuffStats.getEffect(122)).append(",")
+		.append(this.getDonsStats().getEffect(122)).append(",").append(buffStats.getEffect(122))
 		.append("|");
-		ASData.append(stats.getEffect(160)).append(",").append(this.getStuffStats().getEffect(160)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(160)).append(",")
-		.append(this.getBuffsStats().getEffect(160)).append("|");
-		ASData.append(stats.getEffect(161)).append(",").append(this.getStuffStats().getEffect(161)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(161)).append(",")
-		.append(this.getBuffsStats().getEffect(161)).append("|");
-		ASData.append(stats.getEffect(241)).append(",").append(this.getStuffStats().getEffect(241)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(241)).append(",")
-		.append(this.getBuffsStats().getEffect(241)).append("|");
-		ASData.append(stats.getEffect(214)).append(",").append(this.getStuffStats().getEffect(214)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(214)).append(",")
-		.append(this.getBuffsStats().getEffect(214)).append("|");
-		ASData.append(stats.getEffect(264)).append(",").append(this.getStuffStats().getEffect(264)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(264)).append(",")
-		.append(this.getBuffsStats().getEffect(264)).append("|");
-		ASData.append(stats.getEffect(254)).append(",").append(this.getStuffStats().getEffect(254)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(254)).append(",")
-		.append(this.getBuffsStats().getEffect(254)).append("|");
-		ASData.append(stats.getEffect(242)).append(",").append(this.getStuffStats().getEffect(242)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(242)).append(",")
-		.append(this.getBuffsStats().getEffect(242)).append("|");
-		ASData.append(stats.getEffect(210)).append(",").append(this.getStuffStats().getEffect(210)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(210)).append(",")
-		.append(this.getBuffsStats().getEffect(210)).append("|");
-		ASData.append(stats.getEffect(260)).append(",").append(this.getStuffStats().getEffect(260)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(260)).append(",")
-		.append(this.getBuffsStats().getEffect(260)).append("|");
-		ASData.append(stats.getEffect(250)).append(",").append(this.getStuffStats().getEffect(250)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(250)).append(",")
-		.append(this.getBuffsStats().getEffect(250)).append("|");
-		ASData.append(stats.getEffect(243)).append(",").append(this.getStuffStats().getEffect(243)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(243)).append(",")
-		.append(this.getBuffsStats().getEffect(243)).append("|");
-		ASData.append(stats.getEffect(211)).append(",").append(this.getStuffStats().getEffect(211)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(211)).append(",")
-		.append(this.getBuffsStats().getEffect(211)).append("|");
-		ASData.append(stats.getEffect(261)).append(",").append(this.getStuffStats().getEffect(261)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(261)).append(",")
-		.append(this.getBuffsStats().getEffect(261)).append("|");
-		ASData.append(stats.getEffect(251)).append(",").append(this.getStuffStats().getEffect(251)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(251)).append(",")
-		.append(this.getBuffsStats().getEffect(251)).append("|");
-		ASData.append(stats.getEffect(244)).append(",").append(this.getStuffStats().getEffect(244)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(244)).append(",")
-		.append(this.getBuffsStats().getEffect(244)).append("|");
-		ASData.append(stats.getEffect(212)).append(",").append(this.getStuffStats().getEffect(212)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(212)).append(",")
-		.append(this.getBuffsStats().getEffect(212)).append("|");
-		ASData.append(stats.getEffect(262)).append(",").append(this.getStuffStats().getEffect(262)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(262)).append(",")
-		.append(this.getBuffsStats().getEffect(262)).append("|");
-		ASData.append(stats.getEffect(252)).append(",").append(this.getStuffStats().getEffect(252)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(252)).append(",")
-		.append(this.getBuffsStats().getEffect(252)).append("|");
-		ASData.append(stats.getEffect(240)).append(",").append(this.getStuffStats().getEffect(240)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(240)).append(",")
-		.append(this.getBuffsStats().getEffect(240)).append("|");
-		ASData.append(stats.getEffect(213)).append(",").append(this.getStuffStats().getEffect(213)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(213)).append(",")
-		.append(this.getBuffsStats().getEffect(213)).append("|");
-		ASData.append(stats.getEffect(263)).append(",").append(this.getStuffStats().getEffect(263)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(263)).append(",")
-		.append(this.getBuffsStats().getEffect(263)).append("|");
-		ASData.append(stats.getEffect(253)).append(",").append(this.getStuffStats().getEffect(253)).append(",")
-		.append(0).append(",").append(this.getBuffsStats().getEffect(253)).append(",")
-		.append(this.getBuffsStats().getEffect(253)).append("|");
+		ASData.append(stats.getEffect(160)).append(",").append(stuffStats.getEffect(160)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(160)).append(",")
+		.append(buffStats.getEffect(160)).append("|");
+		ASData.append(stats.getEffect(161)).append(",").append(stuffStats.getEffect(161)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(161)).append(",")
+		.append(buffStats.getEffect(161)).append("|");
+		ASData.append(stats.getEffect(241)).append(",").append(stuffStats.getEffect(241)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(241)).append(",")
+		.append(buffStats.getEffect(241)).append("|");
+		ASData.append(stats.getEffect(214)).append(",").append(stuffStats.getEffect(214)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(214)).append(",")
+		.append(buffStats.getEffect(214)).append("|");
+		ASData.append(stats.getEffect(264)).append(",").append(stuffStats.getEffect(264)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(264)).append(",")
+		.append(buffStats.getEffect(264)).append("|");
+		ASData.append(stats.getEffect(254)).append(",").append(stuffStats.getEffect(254)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(254)).append(",")
+		.append(buffStats.getEffect(254)).append("|");
+		ASData.append(stats.getEffect(242)).append(",").append(stuffStats.getEffect(242)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(242)).append(",")
+		.append(buffStats.getEffect(242)).append("|");
+		ASData.append(stats.getEffect(210)).append(",").append(stuffStats.getEffect(210)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(210)).append(",")
+		.append(buffStats.getEffect(210)).append("|");
+		ASData.append(stats.getEffect(260)).append(",").append(stuffStats.getEffect(260)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(260)).append(",")
+		.append(buffStats.getEffect(260)).append("|");
+		ASData.append(stats.getEffect(250)).append(",").append(stuffStats.getEffect(250)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(250)).append(",")
+		.append(buffStats.getEffect(250)).append("|");
+		ASData.append(stats.getEffect(243)).append(",").append(stuffStats.getEffect(243)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(243)).append(",")
+		.append(buffStats.getEffect(243)).append("|");
+		ASData.append(stats.getEffect(211)).append(",").append(stuffStats.getEffect(211)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(211)).append(",")
+		.append(buffStats.getEffect(211)).append("|");
+		ASData.append(stats.getEffect(261)).append(",").append(stuffStats.getEffect(261)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(261)).append(",")
+		.append(buffStats.getEffect(261)).append("|");
+		ASData.append(stats.getEffect(251)).append(",").append(stuffStats.getEffect(251)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(251)).append(",")
+		.append(buffStats.getEffect(251)).append("|");
+		ASData.append(stats.getEffect(244)).append(",").append(stuffStats.getEffect(244)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(244)).append(",")
+		.append(buffStats.getEffect(244)).append("|");
+		ASData.append(stats.getEffect(212)).append(",").append(stuffStats.getEffect(212)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(212)).append(",")
+		.append(buffStats.getEffect(212)).append("|");
+		ASData.append(stats.getEffect(262)).append(",").append(stuffStats.getEffect(262)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(262)).append(",")
+		.append(buffStats.getEffect(262)).append("|");
+		ASData.append(stats.getEffect(252)).append(",").append(stuffStats.getEffect(252)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(252)).append(",")
+		.append(buffStats.getEffect(252)).append("|");
+		ASData.append(stats.getEffect(240)).append(",").append(stuffStats.getEffect(240)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(240)).append(",")
+		.append(buffStats.getEffect(240)).append("|");
+		ASData.append(stats.getEffect(213)).append(",").append(stuffStats.getEffect(213)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(213)).append(",")
+		.append(buffStats.getEffect(213)).append("|");
+		ASData.append(stats.getEffect(263)).append(",").append(stuffStats.getEffect(263)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(263)).append(",")
+		.append(buffStats.getEffect(263)).append("|");
+		ASData.append(stats.getEffect(253)).append(",").append(stuffStats.getEffect(253)).append(",")
+		.append(0).append(",").append(buffStats.getEffect(253)).append(",")
+		.append(buffStats.getEffect(253)).append("|");
 		return ASData.toString();
 	}
 
@@ -2493,6 +2495,17 @@ public class Player {
 		final Stats stats = new Stats(false, null);
 		for (final Map.Entry<Integer, SpellEffect> entry : this._buffs.entrySet()) {
 			stats.addOneStat(entry.getValue().getEffectID(), entry.getValue().getValue());
+		}
+
+		if (this._fight != null) {
+			final Fighter f = this._fight.getFighterByPerso(this);
+			if (f != null) {
+				ArrayList<SpellEffect> fightBuffs = f.getFightBuff();
+				for ( SpellEffect sp : fightBuffs )
+				{
+					stats.addOneStat(sp.getEffectID(), sp.getValue());
+				}
+			}
 		}
 		return stats;
 	}
