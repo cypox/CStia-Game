@@ -1135,7 +1135,7 @@ public class SocketManager {
 		if ( turns < 0 )
 			turns = 0;
 		packet.append("GIE").append(mType).append(";").append(cible).append(";").append(value).append(";")
-				.append(mParam2).append(";").append(mParam3).append(";").append(mParam4).append(";").append(turn-1)
+				.append(mParam2).append(";").append(mParam3).append(";").append(mParam4).append(";").append(turns)
 				.append(";").append(spellID);
 		for (final Fighter f : fight.getFighters(teams)) {
 			if (!f.hasLeft()) {

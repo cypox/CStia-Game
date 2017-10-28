@@ -3428,7 +3428,8 @@ public class SpellEffect {
 			SocketManager.GAME_SEND_GA_PACKET_TO_FIGHT(fight, 7, 128,
 					new StringBuilder(String.valueOf(this.caster.getId())).toString(),
 					String.valueOf(this.caster.getId()) + "," + num + "," + this.turns);
-			this.caster.addBuff(128, num, this.turns, 1, true, this.spell, this.args, this.caster, false);
+			//this.caster.addBuff(128, num, this.turns, 1, true, this.spell, this.args, this.caster, false);
+			this.caster.addBuff(128, num, 1, 1, true, this.spell, this.args, this.caster, false);
 			if (this.caster.canPlay()) {
 				this.caster.setCurPm(fight, num);
 			}
