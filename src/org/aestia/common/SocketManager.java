@@ -1131,8 +1131,11 @@ public class SocketManager {
 			final int cible, final int value, final String mParam2, final String mParam3, final String mParam4,
 			final int turn, final int spellID) {
 		final StringBuilder packet = new StringBuilder();
+		int turns = turn-1;
+		if ( turns < 0 )
+			turns = 0;
 		packet.append("GIE").append(mType).append(";").append(cible).append(";").append(value).append(";")
-				.append(mParam2).append(";").append(mParam3).append(";").append(mParam4).append(";").append(turn)
+				.append(mParam2).append(";").append(mParam3).append(";").append(mParam4).append(";").append(turn-1)
 				.append(";").append(spellID);
 		for (final Fighter f : fight.getFighters(teams)) {
 			if (!f.hasLeft()) {
