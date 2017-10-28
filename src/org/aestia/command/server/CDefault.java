@@ -81,16 +81,16 @@ public class CDefault extends Command {
 			if (cmd.equalsIgnoreCase("")) {
 				SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(),
 						"\nVous avez actuellement le groupe GM " + this.getPlayer().getGroupe().getNom()
-								+ ".\nCommandes disponibles :\n");
+						+ ".\nCommandes disponibles :\n");
 				for (final Commandes commande : this.getPlayer().getGroupe().getCommandes()) {
 					final String args = (commande.getArguments().get(1) != null
 							&& !commande.getArguments().get(1).equalsIgnoreCase(""))
-									? (" + " + commande.getArguments().get(1)) : "";
-					final String desc = (commande.getArguments().get(2) != null
-							&& !commande.getArguments().get(2).equalsIgnoreCase("")) ? commande.getArguments().get(2)
-									: "";
-					SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(),
-							"<u>" + commande.getArguments().get(0) + args + "</u> - " + desc);
+							? (" + " + commande.getArguments().get(1)) : "";
+							final String desc = (commande.getArguments().get(2) != null
+									&& !commande.getArguments().get(2).equalsIgnoreCase("")) ? commande.getArguments().get(2)
+											: "";
+									SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(),
+											"<u>" + commande.getArguments().get(0) + args + "</u> - " + desc);
 				}
 				return;
 			}
@@ -100,12 +100,12 @@ public class CDefault extends Command {
 				if (commande.getArguments().get(0).contains(cmd.toUpperCase())) {
 					final String args = (commande.getArguments().get(1) != null
 							&& !commande.getArguments().get(1).equalsIgnoreCase(""))
-									? (" + " + commande.getArguments().get(1)) : "";
-					final String desc = (commande.getArguments().get(2) != null
-							&& !commande.getArguments().get(2).equalsIgnoreCase("")) ? commande.getArguments().get(2)
-									: "";
-					SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(),
-							"<u>" + commande.getArguments().get(0) + args + "</u> - " + desc);
+							? (" + " + commande.getArguments().get(1)) : "";
+							final String desc = (commande.getArguments().get(2) != null
+									&& !commande.getArguments().get(2).equalsIgnoreCase("")) ? commande.getArguments().get(2)
+											: "";
+									SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(),
+											"<u>" + commande.getArguments().get(0) + args + "</u> - " + desc);
 				}
 			}
 		} else {
@@ -131,7 +131,7 @@ public class CDefault extends Command {
 				SocketManager.GAME_SEND_ERASE_ON_MAP_TO_MAP(perso.getCurMap(), perso.getId());
 				World.unloadPerso(perso);
 				final String str = "Le joueur " + perso.getName()
-						+ " a \u00e9t\u00e9 r\u00e9initialis\u00e9 de ces variables.";
+				+ " a \u00e9t\u00e9 r\u00e9initialis\u00e9 de ces variables.";
 				SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str);
 				return;
 			}
@@ -211,7 +211,7 @@ public class CDefault extends Command {
 				}
 				perso.warpToSavePos();
 				final String str = "Le joueur " + perso.getName()
-						+ " a \u00e9t\u00e9 teleport\u00e9 \u00e0 son point de sauvegarde.";
+				+ " a \u00e9t\u00e9 teleport\u00e9 \u00e0 son point de sauvegarde.";
 				SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str);
 			} else {
 				if (command.equalsIgnoreCase("JOBLEFT")) {
@@ -360,30 +360,34 @@ public class CDefault extends Command {
 					} catch (Exception ex5) {
 					}
 					if ( mapX == -1 || mapY == -1 || cellID == -1 || index == -1 ) {
-						String str3 = "Coordonnées invalides.";
+						String str3 = "Coordonnï¿½es invalides.";
 						SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str3);
 					}
-					org.aestia.map.Map targetMap = World.getMapByPosInArray(mapX, mapY).get(index);
-					if ( targetMap.getId() < 0 ) {
-						String str4 = "MapID invalide.";
-						SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str4);
-					}
-					if ( targetMap.getCase(cellID) == null ) {
-						String str4 = "CellID invalide.";
-						SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str4);
-					}
-					Player perso4 = this.getPlayer();
-					if (infos.length > 5) {
-						perso4 = World.getPersoByName(infos[5]);
-						if (perso4 == null || perso4.get_fight() != null) {
-							final String str4 = "Le personnage n'a pas \u00e9t\u00e9 trouv\u00e9 ou est en combat";
+					try {
+						org.aestia.map.Map targetMap = World.getMapByPosInArray(mapX, mapY).get(index);
+						if ( targetMap.getId() < 0 ) {
+							String str4 = "MapID invalide.";
 							SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str4);
-							return;
 						}
+						if ( targetMap.getCase(cellID) == null ) {
+							String str4 = "CellID invalide.";
+							SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str4);
+						}
+						Player perso4 = this.getPlayer();
+						if (infos.length > 5) {
+							perso4 = World.getPersoByName(infos[5]);
+							if (perso4 == null || perso4.get_fight() != null) {
+								final String str4 = "Le personnage n'a pas \u00e9t\u00e9 trouv\u00e9 ou est en combat";
+								SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str4);
+								return;
+							}
+						}
+						perso4.teleport(targetMap.getId(), cellID);
+						final String str4 = "Le joueur " + perso4.getName() + " a \u00e9t\u00e9 teleport\u00e9.";
+						SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str4);
+					} catch(IndexOutOfBoundsException e) {
+						SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), "Index out of bounds.");
 					}
-					perso4.teleport(targetMap.getId(), cellID);
-					final String str4 = "Le joueur " + perso4.getName() + " a \u00e9t\u00e9 teleport\u00e9.";
-					SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str4);
 				} else if (command.equalsIgnoreCase("TP")) {
 					short mapID3 = -1;
 					int cellID3 = -1;
@@ -721,7 +725,7 @@ public class CDefault extends Command {
 									perso3.teleportD(mapID3, cellID3);
 								}
 								final String str4 = "Le joueur " + perso3.getName()
-										+ " a \u00e9t\u00e9 teleport\u00e9 emprisonn\u00e9.";
+								+ " a \u00e9t\u00e9 teleport\u00e9 emprisonn\u00e9.";
 								SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str4);
 							}
 						} catch (Exception e4) {
@@ -737,7 +741,7 @@ public class CDefault extends Command {
 						if (infos.length > 1 && perso.isInPrison()) {
 							perso.warpToSavePos();
 							final String str = "Le joueur " + perso.getName()
-									+ " a \u00e9t\u00e9 teleport\u00e9 \u00e0 son point de sauvegarde.";
+							+ " a \u00e9t\u00e9 teleport\u00e9 \u00e0 son point de sauvegarde.";
 							SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(), str);
 						}
 					} else if (command.equalsIgnoreCase("BAN")) {
@@ -1248,12 +1252,12 @@ public class CDefault extends Command {
 										if (perso4 != null) {
 											if (persos.equalsIgnoreCase("")) {
 												persos = String.valueOf(persos) + perso4.getName()
-														+ ((perso4.getGroupe() != null)
-																? (":" + perso4.getGroupe().getNom()) : "");
+												+ ((perso4.getGroupe() != null)
+														? (":" + perso4.getGroupe().getNom()) : "");
 											} else {
 												persos = String.valueOf(persos) + ", " + perso4.getName()
-														+ ((perso4.getGroupe() != null)
-																? (":" + perso4.getGroupe().getNom()) : "");
+												+ ((perso4.getGroupe() != null)
+														? (":" + perso4.getGroupe().getNom()) : "");
 											}
 										}
 									}
@@ -1374,7 +1378,7 @@ public class CDefault extends Command {
 									// monitorexit(perso.getItems())
 									SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(),
 											"Vous venez de supprimer " + i + " objets au joueur " + perso.getName()
-													+ ".");
+											+ ".");
 								} else {
 									if (command.equalsIgnoreCase("RMOBS")) {
 										this.getPlayer().getCurMap().refreshSpawns();
@@ -1463,7 +1467,7 @@ public class CDefault extends Command {
 											this.getPlayer().thatCell = this.getPlayer().getCurCell().getId();
 											SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(),
 													"Vous avez sauvegard\u00e9 la map " + this.getPlayer().thatMap
-															+ " et la cellule " + this.getPlayer().thatCell + ".");
+													+ " et la cellule " + this.getPlayer().thatCell + ".");
 											return;
 										}
 										if (command.equalsIgnoreCase("APPLYTHAT")) {
@@ -1475,7 +1479,7 @@ public class CDefault extends Command {
 											this.getPlayer().getCurCell().addOnCellStopAction(0,
 													String.valueOf(this.getPlayer().thatMap) + ","
 															+ this.getPlayer().thatCell,
-													"-1", null);
+															"-1", null);
 											Database.getStatique().getScripted_cellData().update(
 													this.getPlayer().getCurMap().getId(),
 													this.getPlayer().getCurCell().getId(), 0, 1,
@@ -1492,7 +1496,7 @@ public class CDefault extends Command {
 												this.getPlayer().thatCell = this.getPlayer().getCurCell().getId();
 												SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(),
 														"Vous avez sauvegard\u00e9 la map " + this.getPlayer().thatMap
-																+ " et la cellule " + this.getPlayer().thatCell + ".");
+														+ " et la cellule " + this.getPlayer().thatCell + ".");
 												return;
 											}
 											if (command.equalsIgnoreCase("APTRIGGER")) {
@@ -1502,16 +1506,16 @@ public class CDefault extends Command {
 													return;
 												}
 												World.getMap((short) this.getPlayer().thatMap)
-														.getCase(this.getPlayer().thatCell).addOnCellStopAction(0,
-																String.valueOf(this.getPlayer().getCurMap().getId())
-																		+ "," + this.getPlayer().getCurCell().getId(),
-																"-1", null);
+												.getCase(this.getPlayer().thatCell).addOnCellStopAction(0,
+														String.valueOf(this.getPlayer().getCurMap().getId())
+														+ "," + this.getPlayer().getCurCell().getId(),
+														"-1", null);
 												Database.getStatique().getScripted_cellData()
-														.update(this.getPlayer().thatMap, this.getPlayer().thatCell, 0,
-																1,
-																String.valueOf(this.getPlayer().getCurMap().getId())
-																		+ "," + this.getPlayer().getCurCell().getId(),
-																"-1");
+												.update(this.getPlayer().thatMap, this.getPlayer().thatCell, 0,
+														1,
+														String.valueOf(this.getPlayer().getCurMap().getId())
+														+ "," + this.getPlayer().getCurCell().getId(),
+														"-1");
 												this.getPlayer().thatMap = -1;
 												this.getPlayer().thatCell = -1;
 												SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(this.getClient(),
@@ -1602,12 +1606,12 @@ public class CDefault extends Command {
 																	SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(
 																			this.getClient(),
 																			"Le combat de " + player4.getName()
-																					+ " a \u00e9t\u00e9 termin\u00e9.");
+																			+ " a \u00e9t\u00e9 termin\u00e9.");
 																} catch (Exception e5) {
 																	SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(
 																			this.getClient(),
 																			"Le combat de " + player4.getName()
-																					+ " a d\u00e9j\u00e0 \u00e9t\u00e9 termin\u00e9.");
+																			+ " a d\u00e9j\u00e0 \u00e9t\u00e9 termin\u00e9.");
 																}
 															}
 														} catch (Exception e) {
@@ -1637,8 +1641,8 @@ public class CDefault extends Command {
 																	+ entry10.getValue().getTemplate().get_id() + " | "
 																	+ entry10.getValue().getCellid() + " | "
 																	+ entry10.getValue().getTemplate()
-																			.getInitQuestionId(this.getPlayer()
-																					.getCurMap().getId());
+																	.getInitQuestionId(this.getPlayer()
+																			.getCurMap().getId());
 															SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(
 																	this.getClient(), mess);
 														}
@@ -1798,7 +1802,7 @@ public class CDefault extends Command {
 																	+ ((count < 0) ? "retir\u00e9" : "ajout\u00e9")
 																	+ " ";
 															mess7 = String.valueOf(mess7) + Math.abs(count)
-																	+ " kamas \u00e0 " + perso4.getName() + ".";
+															+ " kamas \u00e0 " + perso4.getName() + ".";
 															SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(
 																	this.getClient(), mess7);
 														} else if (command.equalsIgnoreCase("ITEMSET")) {
@@ -2252,8 +2256,8 @@ public class CDefault extends Command {
 																		if (perso == null) {
 																			final String mess2 = "Le personnage n'existe pas.";
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(), mess2);
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(), mess2);
 																			return;
 																		}
 																		perso.getStats().addOneStat(125,
@@ -2284,14 +2288,14 @@ public class CDefault extends Command {
 																		if (perso == null) {
 																			final String mess2 = "Le personnage n'existe pas.";
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(), mess2);
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(), mess2);
 																			return;
 																		}
 																		final String name3 = perso.getName();
 																		perso.setName(infos[2]);
 																		Database.getStatique().getPlayerData()
-																				.update(perso, false);
+																		.update(perso, false);
 																		SocketManager.GAME_SEND_STATS_PACKET(perso);
 																		SocketManager.GAME_SEND_ERASE_ON_MAP_TO_MAP(
 																				perso.getCurMap(), perso.getId());
@@ -2300,8 +2304,8 @@ public class CDefault extends Command {
 																		SocketManager.GAME_SEND_CONSOLE_MESSAGE_PACKET(
 																				this.getClient(),
 																				"Vous avez renomm\u00e9 " + name3
-																						+ " en " + perso.getName()
-																						+ ".");
+																				+ " en " + perso.getName()
+																				+ ".");
 																	} else if (command
 																			.equalsIgnoreCase("RENAMEGUILDE")) {
 																		String ancName = "";
@@ -2315,8 +2319,8 @@ public class CDefault extends Command {
 																		if (idGuild == -1) {
 																			final String mess5 = "La guilde n'existe pas.";
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(), mess5);
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(), mess5);
 																			return;
 																		}
 																		World.getGuild(idGuild).setName(newName);
@@ -2331,27 +2335,27 @@ public class CDefault extends Command {
 																			SocketManager.GAME_SEND_Im_PACKET_TO_ALL(
 																					"116;" + prefix + "~" + infos[1]);
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(),
-																							"Vous avez envoy\u00e9 un message \u00e0 tout le serveur.");
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(),
+																					"Vous avez envoy\u00e9 un message \u00e0 tout le serveur.");
 																			return;
 																		}
 																		if (command.equalsIgnoreCase("MOVENPC")) {
 																			this.getPlayer().getCurMap()
-																					.onMapNpcDisplacement(true);
+																			.onMapNpcDisplacement(true);
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(),
-																							"Vous avez d\u00e9plac\u00e9 les NPCs.");
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(),
+																					"Vous avez d\u00e9plac\u00e9 les NPCs.");
 																			return;
 																		}
 																		if (command.equalsIgnoreCase("MOVEMOB")) {
 																			this.getPlayer().getCurMap()
-																					.onMapMonstersDisplacement();
+																			.onMapMonstersDisplacement();
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(),
-																							"Vous avez d\u00e9plac\u00e9 un groupe de monstres.");
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(),
+																					"Vous avez d\u00e9plac\u00e9 un groupe de monstres.");
 																			return;
 																		}
 																		if (command.equalsIgnoreCase("ALLGIFTS")) {
@@ -2364,9 +2368,9 @@ public class CDefault extends Command {
 																				jp = Integer.parseInt(infos[3]);
 																			} catch (Exception e7) {
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Param\u00e8tre incorrect : ALLGIFTS [templateid] [quantity] [jp= 1 ou 0]");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Param\u00e8tre incorrect : ALLGIFTS [templateid] [quantity] [jp= 1 ou 0]");
 																				return;
 																			}
 																			final String gift = String.valueOf(template)
@@ -2379,24 +2383,24 @@ public class CDefault extends Command {
 																								account.getGuid());
 																				if (gifts.isEmpty()) {
 																					Database.getStatique().getGiftData()
-																							.update(account.getGuid(),
-																									gift);
+																					.update(account.getGuid(),
+																							gift);
 																				} else {
 																					Database.getStatique().getGiftData()
-																							.update(account.getGuid(),
-																									String.valueOf(
-																											gifts) + ";"
-																											+ gift);
+																					.update(account.getGuid(),
+																							String.valueOf(
+																									gifts) + ";"
+																									+ gift);
 																				}
 																			}
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(),
-																							String.valueOf(
-																									World.getAccounts()
-																											.size())
-																									+ " ont re\u00e7u le cadeau : "
-																									+ gift + ".");
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(),
+																					String.valueOf(
+																							World.getAccounts()
+																							.size())
+																					+ " ont re\u00e7u le cadeau : "
+																					+ gift + ".");
 																			return;
 																		}
 																		if (command.equalsIgnoreCase("GIFTS")) {
@@ -2411,18 +2415,18 @@ public class CDefault extends Command {
 																				jp2 = Integer.parseInt(infos[4]);
 																			} catch (Exception e5) {
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Param\u00e8tre incorrect : GIFTS [account] [templateid] [quantity] [jp= 1 ou 0]");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Param\u00e8tre incorrect : GIFTS [account] [templateid] [quantity] [jp= 1 ou 0]");
 																				return;
 																			}
 																			final Player player = World
 																					.getPersoByName(name4);
 																			if (player == null) {
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Personnage inexistant.");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Personnage inexistant.");
 																				return;
 																			}
 																			final String gift2 = String
@@ -2433,23 +2437,23 @@ public class CDefault extends Command {
 																							.getAccount().getGuid());
 																			if (gifts.isEmpty()) {
 																				Database.getStatique()
-																						.getGiftData().update(
-																								player.getAccount()
-																										.getGuid(),
-																								gift2);
+																				.getGiftData().update(
+																						player.getAccount()
+																						.getGuid(),
+																						gift2);
 																			} else {
 																				Database.getStatique().getGiftData()
-																						.update(player.getAccount()
-																								.getGuid(),
-																								String.valueOf(gifts)
-																										+ ";" + gift2);
+																				.update(player.getAccount()
+																						.getGuid(),
+																						String.valueOf(gifts)
+																						+ ";" + gift2);
 																			}
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(),
-																							String.valueOf(name4)
-																									+ " a re\u00e7u le cadeau : "
-																									+ gift2 + ".");
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(),
+																					String.valueOf(name4)
+																					+ " a re\u00e7u le cadeau : "
+																					+ gift2 + ".");
 																		} else if (command
 																				.equalsIgnoreCase("SHOWPOINTS")) {
 																			Player perso = this.getPlayer();
@@ -2459,20 +2463,20 @@ public class CDefault extends Command {
 																			if (perso == null) {
 																				final String mess2 = "Le personnage n'existe pas.";
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								mess2);
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						mess2);
 																				return;
 																			}
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(),
-																							String.valueOf(
-																									perso.getName())
-																									+ " poss\u00e8de "
-																									+ perso.getAccount()
-																											.getPoints()
-																									+ " points boutique.");
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(),
+																					String.valueOf(
+																							perso.getName())
+																					+ " poss\u00e8de "
+																					+ perso.getAccount()
+																					.getPoints()
+																					+ " points boutique.");
 																		} else if (command.equalsIgnoreCase("ADDNPC")) {
 																			int id = 0;
 																			try {
@@ -2483,26 +2487,26 @@ public class CDefault extends Command {
 																					.getNPCTemplate(id) == null) {
 																				final String str = "NpcID invalide.";
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(), str);
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(), str);
 																				return;
 																			}
 																			final Npc npc = this.getPlayer().getCurMap()
 																					.addNpc(id, this.getPlayer()
 																							.getCurCell().getId(),
 																							this.getPlayer()
-																									.get_orientation(),
+																							.get_orientation(),
 																							false);
 																			SocketManager.GAME_SEND_ADD_NPC_TO_MAP(
 																					this.getPlayer().getCurMap(), npc);
 																			String str3 = "Le PNJ a \u00e9t\u00e9 ajout\u00e9";
 																			if (this.getPlayer().get_orientation() == 0
 																					|| this.getPlayer()
-																							.get_orientation() == 2
+																					.get_orientation() == 2
 																					|| this.getPlayer()
-																							.get_orientation() == 4
+																					.get_orientation() == 4
 																					|| this.getPlayer()
-																							.get_orientation() == 6) {
+																					.get_orientation() == 6) {
 																				str3 = String.valueOf(str3)
 																						+ " mais est invisible (orientation diagonale invalide)";
 																			}
@@ -2510,22 +2514,22 @@ public class CDefault extends Command {
 																			if (Database.getStatique().getNpcData()
 																					.addOnMap(
 																							this.getPlayer().getCurMap()
-																									.getId(),
+																							.getId(),
 																							id,
 																							this.getPlayer()
-																									.getCurCell()
-																									.getId(),
+																							.getCurCell()
+																							.getId(),
 																							this.getPlayer()
-																									.get_orientation(),
+																							.get_orientation(),
 																							false)) {
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(), str3);
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(), str3);
 																			} else {
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Erreur lors de la sauvegarde de la position.");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Erreur lors de la sauvegarde de la position.");
 																			}
 																		} else if (command.equalsIgnoreCase("DELNPC")) {
 																			int id = 0;
@@ -2538,27 +2542,27 @@ public class CDefault extends Command {
 																			if (id == 0 || npc == null) {
 																				final String str3 = "Npc GUID invalide.";
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(), str3);
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(), str3);
 																				return;
 																			}
 																			final int exC = npc.getCellid();
 																			SocketManager.GAME_SEND_ERASE_ON_MAP_TO_MAP(
 																					this.getPlayer().getCurMap(), id);
 																			this.getPlayer().getCurMap()
-																					.removeNpcOrMobGroup(id);
+																			.removeNpcOrMobGroup(id);
 																			final String str4 = "Le PNJ a \u00e9t\u00e9 supprim\u00e9.";
 																			if (Database.getStatique().getNpcData()
 																					.delete(this.getPlayer().getCurMap()
 																							.getId(), exC)) {
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(), str4);
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(), str4);
 																			} else {
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Erreur lors de la sauvegarde de la position.");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Erreur lors de la sauvegarde de la position.");
 																			}
 																		} else if (command
 																				.equalsIgnoreCase("SETSTATS")) {
@@ -2571,18 +2575,18 @@ public class CDefault extends Command {
 																			}
 																			if (obj4 == -1 || stats.equals("")) {
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Les param\u00e8tres sont invalides.");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Les param\u00e8tres sont invalides.");
 																				return;
 																			}
 																			final org.aestia.object.Object object = World
 																					.getObjet(obj4);
 																			if (object == null) {
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"L'objet n'existe pas.");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"L'objet n'existe pas.");
 																				return;
 																			}
 																			if (stats.equals("-1")) {
@@ -2595,30 +2599,30 @@ public class CDefault extends Command {
 																						this.getPlayer(), object);
 																			}
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(),
-																							"L'objet a \u00e9t\u00e9 modifi\u00e9 avec succ\u00e8s.");
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(),
+																					"L'objet a \u00e9t\u00e9 modifi\u00e9 avec succ\u00e8s.");
 																		} else if (command
 																				.equalsIgnoreCase("ADDCELLPARK")) {
 																			if (this.getPlayer().getCurMap()
 																					.getMountPark() == null) {
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Pas d'enclos sur votre map.");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Pas d'enclos sur votre map.");
 																				return;
 																			}
 																			this.getPlayer().getCurMap().getMountPark()
-																					.addCellObject(this.getPlayer()
-																							.getCurCell().getId());
+																			.addCellObject(this.getPlayer()
+																					.getCurCell().getId());
 																			Database.getStatique()
-																					.getMountpark_dataData()
-																					.update(this.getPlayer().getCurMap()
-																							.getMountPark());
+																			.getMountpark_dataData()
+																			.update(this.getPlayer().getCurMap()
+																					.getMountPark());
 																			SocketManager
-																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																							this.getClient(),
-																							"Vous avez ajout\u00e9 la cellule \u00e0 l'enclos.");
+																			.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																					this.getClient(),
+																					"Vous avez ajout\u00e9 la cellule \u00e0 l'enclos.");
 																		} else {
 																			if (command.equalsIgnoreCase("O")) {
 																				final MountPark mp = this.getPlayer()
@@ -2630,111 +2634,111 @@ public class CDefault extends Command {
 																						switch (c2.getObject()
 																								.getTemplate()
 																								.getId()) {
-																						case 6763:
-																						case 6766:
-																						case 6767:
-																						case 6772: {
-																							mp.setDoor(c2.getId());
-																							SocketManager
+																								case 6763:
+																								case 6766:
+																								case 6767:
+																								case 6772: {
+																									mp.setDoor(c2.getId());
+																									SocketManager
 																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
 																											this.getClient(),
 																											"Vous avez ajout\u00e9 une porte \u00e0 l'enclos.");
-																							return;
-																						}
-																						default: {
-																							continue;
-																						}
+																									return;
+																								}
+																								default: {
+																									continue;
+																								}
 																						}
 																					}
 																				}
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Vous ne vous situez pas sur la porte.");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Vous ne vous situez pas sur la porte.");
 																			} else if (command.equalsIgnoreCase("A1")) {
 																				this.getPlayer().getCurMap()
-																						.getMountPark()
-																						.setMountCell(this.getPlayer()
-																								.getCurCell().getId());
+																				.getMountPark()
+																				.setMountCell(this.getPlayer()
+																						.getCurCell().getId());
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Vous avez modifi\u00e9 la cellule de spawn de l'enclos.");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Vous avez modifi\u00e9 la cellule de spawn de l'enclos.");
 																			} else if (command.equalsIgnoreCase("B1")) {
 																				this.getPlayer().getCases = true;
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Vous avez activ\u00e9 le getCases.");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Vous avez activ\u00e9 le getCases.");
 																			} else if (command.equalsIgnoreCase("C1")) {
 																				this.getPlayer().getCases = false;
 																				this.getPlayer().getCurMap()
-																						.getMountPark()
-																						.setCellObject(this
-																								.getPlayer().thisCases);
+																				.getMountPark()
+																				.setCellObject(this
+																						.getPlayer().thisCases);
 																				this.getPlayer().thisCases.clear();
 																				Database.getStatique()
-																						.getMountpark_dataData()
-																						.update(this.getPlayer()
-																								.getCurMap()
-																								.getMountPark());
+																				.getMountpark_dataData()
+																				.update(this.getPlayer()
+																						.getCurMap()
+																						.getMountPark());
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								"Vous avez appliqu\u00e9 les nouvelles cases \u00e0 l'enclos.");
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						"Vous avez appliqu\u00e9 les nouvelles cases \u00e0 l'enclos.");
 																			} else {
 																				if (command.equalsIgnoreCase(
 																						"RELOADDROP")) {
 																					World.reloadDrops();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des drops a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des drops a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"RELOADENDFIGHT")) {
 																					World.reloadEndFightActions();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des endfights a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des endfights a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"RELOADHOUSE")) {
 																					World.reloadHouses();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des maisons a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des maisons a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"RELOADCOFFRE")) {
 																					World.reloadTrunks();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des coffres a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des coffres a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"RELOADACTION")) {
 																					World.reloadObjectsActions();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des actions a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des actions a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"RELOADMAP")) {
 																					World.reloadMaps();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des maps a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des maps a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
@@ -2743,56 +2747,56 @@ public class CDefault extends Command {
 																							.parseInt(infos[1]);
 																					World.reloadMountParks(j);
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement de l'enclos "
-																											+ j
-																											+ " a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement de l'enclos "
+																									+ j
+																									+ " a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"RELOADNPC")) {
 																					World.reloadNpcs();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des Npcs a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des Npcs a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"RELOADSPELL")) {
 																					World.reloadSpells();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des sorts a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des sorts a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"RELOADITEM")) {
 																					World.reloadItems();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des items a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des items a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"RELOADMONSTER")) {
 																					World.reloadMonsters();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des monstres a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des monstres a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"RELOADQUEST")) {
 																					World.reloadQuests();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des qu\u00eates a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des qu\u00eates a \u00e9t\u00e9 \u00e9ffectu\u00e9.");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
@@ -2801,37 +2805,37 @@ public class CDefault extends Command {
 																					Groupes.reload();
 																					World.reloadPlayerGroup();
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Le rechargement des commandes et des groupes ont \u00e9t\u00e9s \u00e9ffectu\u00e9s.");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Le rechargement des commandes et des groupes ont \u00e9t\u00e9s \u00e9ffectu\u00e9s.");
 																					return;
 																				}
 																				if (command
 																						.equalsIgnoreCase("CONVERT")) {
 																					try {
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										Integer.toHexString(
-																												Integer.parseInt(
-																														infos[1])));
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								Integer.toHexString(
+																										Integer.parseInt(
+																												infos[1])));
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										new StringBuilder(
-																												String.valueOf(
-																														Integer.parseInt(
-																																infos[1],
-																																16))).toString());
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								new StringBuilder(
+																										String.valueOf(
+																												Integer.parseInt(
+																														infos[1],
+																														16))).toString());
 																					} catch (Exception e) {
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										new StringBuilder(
-																												String.valueOf(
-																														Integer.parseInt(
-																																infos[1],
-																																16))).toString());
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								new StringBuilder(
+																										String.valueOf(
+																												Integer.parseInt(
+																														infos[1],
+																														16))).toString());
 																					}
 																					return;
 																				}
@@ -2848,9 +2852,9 @@ public class CDefault extends Command {
 																						}
 																					}
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									s);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							s);
 																					return;
 																				}
 																				if (command.equalsIgnoreCase("EMOTE")) {
@@ -2867,15 +2871,15 @@ public class CDefault extends Command {
 																						perso = this.getPlayer();
 																					}
 																					this.getPlayer()
-																							.addStaticEmote(emoteId);
+																					.addStaticEmote(emoteId);
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"L'\u00e9mote "
-																											+ emoteId
-																											+ " a \u00e9t\u00e9 ajout\u00e9 au joueur "
-																											+ perso.getName()
-																											+ ".");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"L'\u00e9mote "
+																									+ emoteId
+																									+ " a \u00e9t\u00e9 ajout\u00e9 au joueur "
+																									+ perso.getName()
+																									+ ".");
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
@@ -2906,9 +2910,9 @@ public class CDefault extends Command {
 																							|| npcTemplate == null) {
 																						final String str5 = "NpcGUID ou itemID invalide.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										str5);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								str5);
 																						return;
 																					}
 																					String str5 = "";
@@ -2919,12 +2923,12 @@ public class CDefault extends Command {
 																						str5 = "L'objet n'a pas \u00e9t\u00e9 retir\u00e9.";
 																					}
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									str5);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							str5);
 																					Database.getStatique()
-																							.getNpc_templateData()
-																							.update(npcTemplate);
+																					.getNpc_templateData()
+																					.update(npcTemplate);
 																					return;
 																				} else if (command.equalsIgnoreCase(
 																						"ADDNPCITEM")) {
@@ -2957,9 +2961,9 @@ public class CDefault extends Command {
 																							|| item == null) {
 																						final String str6 = "NpcGUID ou itemID invalide.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										str6);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								str6);
 																						return;
 																					}
 																					String str6 = "";
@@ -2970,12 +2974,12 @@ public class CDefault extends Command {
 																						str6 = "L'objet n'a pas \u00e9t\u00e9 rajout\u00e9.";
 																					}
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									str6);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							str6);
 																					Database.getStatique()
-																							.getNpc_templateData()
-																							.update(npcTemplate);
+																					.getNpc_templateData()
+																					.update(npcTemplate);
 																					return;
 																				} else {
 																					if (command.equalsIgnoreCase(
@@ -2989,16 +2993,16 @@ public class CDefault extends Command {
 																									+ i2.getKey()
 																									+ " est sur la map : "
 																									+ i2.getValue()
-																											.getId();
+																									.getId();
 																						}
 																						if (World.getExtraMonsterOnMap()
 																								.size() <= 0) {
 																							mess = "Aucun Extra Monstres existe.";
 																						}
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess);
 																						return;
 																					}
 																					if (command.equalsIgnoreCase(
@@ -3012,9 +3016,9 @@ public class CDefault extends Command {
 																						if (perso == null) {
 																							final String mess2 = "Le personnage n'existe pas.";
 																							SocketManager
-																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																											this.getClient(),
-																											mess2);
+																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																									this.getClient(),
+																									mess2);
 																							return;
 																						}
 																						if (!perso.isOnline()) {
@@ -3022,9 +3026,9 @@ public class CDefault extends Command {
 																									+ perso.getName()
 																									+ " n'est pas connect\u00e9.";
 																							SocketManager
-																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																											this.getClient(),
-																											mess2);
+																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																									this.getClient(),
+																									mess2);
 																							return;
 																						}
 																						if (perso.get_guild() != null
@@ -3033,22 +3037,22 @@ public class CDefault extends Command {
 																									+ perso.getName()
 																									+ " poss\u00e8de d\u00e9j\u00e0 une guilde.";
 																							SocketManager
-																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																											this.getClient(),
-																											mess2);
+																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																									this.getClient(),
+																									mess2);
 																							return;
 																						}
 																						SocketManager
-																								.GAME_SEND_gn_PACKET(
-																										perso);
+																						.GAME_SEND_gn_PACKET(
+																								perso);
 																						final String mess2 = String
 																								.valueOf(
 																										perso.getName())
 																								+ ": Panneau de creation de guilde ouvert.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess2);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess2);
 																						return;
 																					} else {
 																						if (command.equalsIgnoreCase(
@@ -3057,25 +3061,25 @@ public class CDefault extends Command {
 																									this.getClient(),
 																									msg.substring(5));
 																							SocketManager
-																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																											this.getClient(),
-																											"Le paquet a \u00e9t\u00e9 envoy\u00e9 : "
-																													+ msg.substring(
-																															5));
+																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																									this.getClient(),
+																									"Le paquet a \u00e9t\u00e9 envoy\u00e9 : "
+																											+ msg.substring(
+																													5));
 																							return;
 																						}
 																						if (command.equalsIgnoreCase(
 																								"SENDTOMAP")) {
 																							SocketManager
-																									.sendPacketToMap(
-																											this.getPlayer()
-																													.getCurMap(),
-																											infos[1]);
+																							.sendPacketToMap(
+																									this.getPlayer()
+																									.getCurMap(),
+																									infos[1]);
 																							SocketManager
-																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																											this.getClient(),
-																											"Le paquet a \u00e9t\u00e9 envoy\u00e9 : "
-																													+ infos[1]);
+																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																									this.getClient(),
+																									"Le paquet a \u00e9t\u00e9 envoy\u00e9 : "
+																											+ infos[1]);
 																							return;
 																						}
 																						if (command.equalsIgnoreCase(
@@ -3090,9 +3094,9 @@ public class CDefault extends Command {
 																							}
 																							if (perso == null) {
 																								SocketManager
-																										.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																												this.getClient(),
-																												"Le nom du personnage est incorrect.");
+																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																										this.getClient(),
+																										"Le nom du personnage est incorrect.");
 																								return;
 																							}
 																							SocketManager.send(
@@ -3100,13 +3104,13 @@ public class CDefault extends Command {
 																											infos[1]),
 																									infos[2]);
 																							SocketManager
-																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																											this.getClient(),
-																											"Le paquet a \u00e9t\u00e9 envoy\u00e9 : "
-																													+ infos[1]
+																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																									this.getClient(),
+																									"Le paquet a \u00e9t\u00e9 envoy\u00e9 : "
+																											+ infos[1]
 																													+ " \u00e0 "
 																													+ infos[1]
-																													+ ".");
+																															+ ".");
 																							return;
 																						} else {
 																							if (command
@@ -3131,21 +3135,21 @@ public class CDefault extends Command {
 																								perso.set_title(
 																										TitleID);
 																								SocketManager
-																										.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																												this.getClient(),
-																												"Vous avez modifi\u00e9 le titre de "
-																														+ perso.getName()
-																														+ ".");
+																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																										this.getClient(),
+																										"Vous avez modifi\u00e9 le titre de "
+																												+ perso.getName()
+																												+ ".");
 																								Database.getStatique()
-																										.getPlayerData()
-																										.update(perso,
-																												false);
+																								.getPlayerData()
+																								.update(perso,
+																										false);
 																								if (perso
 																										.get_fight() == null) {
 																									SocketManager
-																											.GAME_SEND_ALTER_GM_PACKET(
-																													perso.getCurMap(),
-																													perso);
+																									.GAME_SEND_ALTER_GM_PACKET(
+																											perso.getCurMap(),
+																											perso);
 																								}
 																								return;
 																							}
@@ -3159,16 +3163,16 @@ public class CDefault extends Command {
 																													infos[1]);
 																								} catch (Exception e6) {
 																									SocketManager
-																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																													this.getClient(),
-																													"Valeur incorrecte.");
+																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																											this.getClient(),
+																											"Valeur incorrecte.");
 																									return;
 																								}
 																								if (count == 0) {
 																									SocketManager
-																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																													this.getClient(),
-																													"Valeur inutile.");
+																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																											this.getClient(),
+																											"Valeur inutile.");
 																									return;
 																								}
 																								Player perso4 = this
@@ -3194,12 +3198,12 @@ public class CDefault extends Command {
 																									pointtotal = 50000;
 																								}
 																								perso4.getAccount()
-																										.setPoints(
-																												pointtotal);
+																								.setPoints(
+																										pointtotal);
 																								if (perso4.isOnline()) {
 																									SocketManager
-																											.GAME_SEND_STATS_PACKET(
-																													perso4);
+																									.GAME_SEND_STATS_PACKET(
+																											perso4);
 																								}
 																								final String mess5 = "Vous venez de donner "
 																										+ count
@@ -3207,9 +3211,9 @@ public class CDefault extends Command {
 																										+ perso4.getName()
 																										+ ".";
 																								SocketManager
-																										.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																												this.getClient(),
-																												mess5);
+																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																										this.getClient(),
+																										mess5);
 																								return;
 																							} else {
 																								if (command
@@ -3242,25 +3246,25 @@ public class CDefault extends Command {
 																										}
 																									}
 																									SocketManager
-																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																													this.getClient(),
-																													"Vous avez tous les objets de type "
-																															+ type
-																															+ " dans votre inventaire.");
+																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																											this.getClient(),
+																											"Vous avez tous les objets de type "
+																													+ type
+																													+ " dans votre inventaire.");
 																									return;
 																								}
 																								if (command
 																										.equalsIgnoreCase(
 																												"FULLMORPH")) {
 																									this.getPlayer()
-																											.setFullMorph(
-																													10,
-																													false,
-																													false);
+																									.setFullMorph(
+																											10,
+																											false,
+																											false);
 																									SocketManager
-																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																													this.getClient(),
-																													"Vous avez \u00e9t\u00e9 transform\u00e9 en crocoburio.");
+																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																											this.getClient(),
+																											"Vous avez \u00e9t\u00e9 transform\u00e9 en crocoburio.");
 																									return;
 																								}
 																								if (command
@@ -3280,11 +3284,11 @@ public class CDefault extends Command {
 																									}
 																									p3.unsetFullMorph();
 																									SocketManager
-																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																													this.getClient(),
-																													"Vous avez transform\u00e9 dans la forme originale "
-																															+ p3.getName()
-																															+ ".");
+																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																											this.getClient(),
+																											"Vous avez transform\u00e9 dans la forme originale "
+																													+ p3.getName()
+																													+ ".");
 																									return;
 																								}
 																								if (command
@@ -3302,21 +3306,21 @@ public class CDefault extends Command {
 																													objID);
 																									if (p4 == null) {
 																										SocketManager
-																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																														this.getClient(),
-																														"Le familier n'existe pas.");
+																										.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																												this.getClient(),
+																												"Le familier n'existe pas.");
 																										return;
 																									}
 																									p4.resurrection();
 																									SocketManager
-																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																													this.getClient(),
-																													"Vous avez r\u00e9ssuscit\u00e9 le familier.");
+																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																											this.getClient(),
+																											"Vous avez r\u00e9ssuscit\u00e9 le familier.");
 																									SocketManager
-																											.GAME_SEND_UPDATE_OBJECT_DISPLAY_PACKET(
-																													this.getPlayer(),
-																													World.getObjet(
-																															objID));
+																									.GAME_SEND_UPDATE_OBJECT_DISPLAY_PACKET(
+																											this.getPlayer(),
+																											World.getObjet(
+																													objID));
 																									return;
 																								} else {
 																									if (command
@@ -3343,9 +3347,9 @@ public class CDefault extends Command {
 																											if (perso3 == null) {
 																												final String str4 = "Le personnage n'a pas \u00e9t\u00e9 trouv\u00e9.";
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																str4);
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														str4);
 																												return;
 																											}
 																										}
@@ -3353,16 +3357,16 @@ public class CDefault extends Command {
 																												g,
 																												true);
 																										Database.getStatique()
-																												.getAccountData()
-																												.update(perso3
-																														.getAccount());
+																										.getAccountData()
+																										.update(perso3
+																												.getAccount());
 																										final String str4 = "Le groupe du joueur "
 																												+ perso3.getName()
 																												+ " a \u00e9t\u00e9 modifi\u00e9.";
 																										SocketManager
-																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																														this.getClient(),
-																														str4);
+																										.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																												this.getClient(),
+																												str4);
 																										return;
 																									}
 																									if (command
@@ -3386,9 +3390,9 @@ public class CDefault extends Command {
 																										if (g2 == null) {
 																											final String str4 = "Le groupe est invalide.";
 																											SocketManager
-																													.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																															this.getClient(),
-																															str4);
+																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																													this.getClient(),
+																													str4);
 																											return;
 																										}
 																										final ArrayList<Commandes> c3 = g2
@@ -3396,49 +3400,49 @@ public class CDefault extends Command {
 																										if (cmd2.equalsIgnoreCase(
 																												"")) {
 																											SocketManager
-																													.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																															this.getClient(),
-																															"\nCommandes disponibles pour le groupe "
-																																	+ g2.getNom()
-																																	+ " :\n");
+																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																													this.getClient(),
+																													"\nCommandes disponibles pour le groupe "
+																															+ g2.getNom()
+																															+ " :\n");
 																											for (final Commandes co : c3) {
 																												final String args3 = (co
 																														.getArguments()
 																														.get(1) != null
 																														&& !co.getArguments()
-																																.get(1)
-																																.equalsIgnoreCase(
-																																		"")) ? (" + "
-																																				+ co.getArguments()
-																																						.get(1))
-																																				: "";
-																												final String desc2 = (co
-																														.getArguments()
-																														.get(2) != null
-																														&& !co.getArguments()
-																																.get(2)
-																																.equalsIgnoreCase(
-																																		"")) ? co
+																														.get(1)
+																														.equalsIgnoreCase(
+																																"")) ? (" + "
+																																		+ co.getArguments()
+																																		.get(1))
+																																		: "";
+																																		final String desc2 = (co
 																																				.getArguments()
+																																				.get(2) != null
+																																				&& !co.getArguments()
 																																				.get(2)
-																																				: "";
-																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"<u>" + co
-																																		.getArguments()
-																																		.get(0)
-																																		+ args3
-																																		+ "</u> - "
-																																		+ desc2);
+																																				.equalsIgnoreCase(
+																																						"")) ? co
+																																								.getArguments()
+																																								.get(2)
+																																								: "";
+																																								SocketManager
+																																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																																										this.getClient(),
+																																										"<u>" + co
+																																										.getArguments()
+																																										.get(0)
+																																										+ args3
+																																										+ "</u> - "
+																																										+ desc2);
 																											}
 																										} else {
 																											SocketManager
-																													.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																															this.getClient(),
-																															"\nCommandes recherch\u00e9s pour le groupe "
-																																	+ g2.getNom()
-																																	+ " :\n");
+																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																													this.getClient(),
+																													"\nCommandes recherch\u00e9s pour le groupe "
+																															+ g2.getNom()
+																															+ " :\n");
 																											for (final Commandes co : c3) {
 																												if (co.getArguments()
 																														.get(0)
@@ -3448,31 +3452,31 @@ public class CDefault extends Command {
 																															.getArguments()
 																															.get(1) != null
 																															&& !co.getArguments()
-																																	.get(1)
-																																	.equalsIgnoreCase(
-																																			"")) ? (" + "
-																																					+ co.getArguments()
-																																							.get(1))
-																																					: "";
-																													final String desc2 = (co
-																															.getArguments()
-																															.get(2) != null
-																															&& !co.getArguments()
-																																	.get(2)
-																																	.equalsIgnoreCase(
-																																			"")) ? co
+																															.get(1)
+																															.equalsIgnoreCase(
+																																	"")) ? (" + "
+																																			+ co.getArguments()
+																																			.get(1))
+																																			: "";
+																																			final String desc2 = (co
 																																					.getArguments()
+																																					.get(2) != null
+																																					&& !co.getArguments()
 																																					.get(2)
-																																					: "";
-																													SocketManager
-																															.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																	this.getClient(),
-																																	"<u>" + co
-																																			.getArguments()
-																																			.get(0)
-																																			+ args3
-																																			+ "</u> - "
-																																			+ desc2);
+																																					.equalsIgnoreCase(
+																																							"")) ? co
+																																									.getArguments()
+																																									.get(2)
+																																									: "";
+																																									SocketManager
+																																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																																											this.getClient(),
+																																											"<u>" + co
+																																											.getArguments()
+																																											.get(0)
+																																											+ args3
+																																											+ "</u> - "
+																																											+ desc2);
 																												}
 																											}
 																										}
@@ -3498,34 +3502,34 @@ public class CDefault extends Command {
 																												perso4.setInvisible(
 																														false);
 																												SocketManager
-																														.GAME_SEND_ERASE_ON_MAP_TO_MAP(
-																																perso4.getCurMap(),
-																																perso4.getId());
+																												.GAME_SEND_ERASE_ON_MAP_TO_MAP(
+																														perso4.getCurMap(),
+																														perso4.getId());
 																												SocketManager
-																														.GAME_SEND_ADD_PLAYER_TO_MAP(
-																																perso4.getCurMap(),
-																																perso4);
+																												.GAME_SEND_ADD_PLAYER_TO_MAP(
+																														perso4.getCurMap(),
+																														perso4);
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Vous \u00eates visible.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Vous \u00eates visible.");
 																											} else {
 																												perso4.setInvisible(
 																														true);
 																												perso4.set_size(
 																														0);
 																												SocketManager
-																														.GAME_SEND_ERASE_ON_MAP_TO_MAP(
-																																perso4.getCurMap(),
-																																perso4.getId());
+																												.GAME_SEND_ERASE_ON_MAP_TO_MAP(
+																														perso4.getCurMap(),
+																														perso4.getId());
 																												SocketManager
-																														.GAME_SEND_ADD_PLAYER_TO_MAP(
-																																perso4.getCurMap(),
-																																perso4);
+																												.GAME_SEND_ADD_PLAYER_TO_MAP(
+																														perso4.getCurMap(),
+																														perso4);
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Vous \u00eates invisible.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Vous \u00eates invisible.");
 																											}
 																											return;
 																										}
@@ -3538,9 +3542,9 @@ public class CDefault extends Command {
 																													(short) 10292,
 																													284);
 																											SocketManager
-																													.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																															this.getClient(),
-																															"Vous avez \u00e9t\u00e9 t\u00e9l\u00e9port\u00e9 \u00e0 Incarnam.");
+																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																													this.getClient(),
+																													"Vous avez \u00e9t\u00e9 t\u00e9l\u00e9port\u00e9 \u00e0 Incarnam.");
 																											return;
 																										}
 																										if (command
@@ -3552,9 +3556,9 @@ public class CDefault extends Command {
 																													(short) 7411,
 																													311);
 																											SocketManager
-																													.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																															this.getClient(),
-																															"Vous avez \u00e9t\u00e9 t\u00e9l\u00e9port\u00e9 \u00e0 Astrub.");
+																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																													this.getClient(),
+																													"Vous avez \u00e9t\u00e9 t\u00e9l\u00e9port\u00e9 \u00e0 Astrub.");
 																											return;
 																										}
 																										if (command
@@ -3571,12 +3575,12 @@ public class CDefault extends Command {
 																											}
 																											if (id == -1
 																													|| perso5
-																															.equalsIgnoreCase(
-																																	"")) {
+																													.equalsIgnoreCase(
+																															"")) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Un des param\u00e8tres est invalide.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Un des param\u00e8tres est invalide.");
 																												return;
 																											}
 																											final Player p5 = World
@@ -3588,9 +3592,9 @@ public class CDefault extends Command {
 																											if (p5 == null
 																													|| q == null) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"La qu\u00eate ou le joueur est introuvable.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"La qu\u00eate ou le joueur est introuvable.");
 																												return;
 																											}
 																											final Quest.Quest_Perso qp = p5
@@ -3598,29 +3602,29 @@ public class CDefault extends Command {
 																															q);
 																											if (qp == null) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Le personnage n'a pas la qu\u00eate.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Le personnage n'a pas la qu\u00eate.");
 																												return;
 																											}
 																											p5.delQuestPerso(
 																													qp.getId());
 																											if (qp.deleteQuestPerso()) {
 																												Database.getStatique()
-																														.getPlayerData()
-																														.update(p5,
-																																false);
+																												.getPlayerData()
+																												.update(p5,
+																														false);
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"La qu\u00eate a \u00e9t\u00e9 supprim\u00e9 sur le personnage "
-																																		+ perso5
-																																		+ ".");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"La qu\u00eate a \u00e9t\u00e9 supprim\u00e9 sur le personnage "
+																																+ perso5
+																																+ ".");
 																											} else {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Un probl\u00e8me est survenu.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Un probl\u00e8me est survenu.");
 																											}
 																											return;
 																										} else if (command
@@ -3637,12 +3641,12 @@ public class CDefault extends Command {
 																											}
 																											if (id == -1
 																													|| perso5
-																															.equalsIgnoreCase(
-																																	"")) {
+																													.equalsIgnoreCase(
+																															"")) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Un des param\u00e8tres est invalide.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Un des param\u00e8tres est invalide.");
 																												return;
 																											}
 																											final Player p5 = World
@@ -3654,9 +3658,9 @@ public class CDefault extends Command {
 																											if (p5 == null
 																													|| q == null) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"La qu\u00eate ou le joueur est introuvable.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"La qu\u00eate ou le joueur est introuvable.");
 																												return;
 																											}
 																											Quest.Quest_Perso qp = p5
@@ -3664,9 +3668,9 @@ public class CDefault extends Command {
 																															q);
 																											if (qp != null) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Le personnage a d\u00e9j\u00e0 la qu\u00eate.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Le personnage a d\u00e9j\u00e0 la qu\u00eate.");
 																												return;
 																											}
 																											q.applyQuest(
@@ -3675,17 +3679,17 @@ public class CDefault extends Command {
 																													q);
 																											if (qp == null) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Une erreur est survenue.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Une erreur est survenue.");
 																												return;
 																											}
 																											SocketManager
-																													.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																															this.getClient(),
-																															"La qu\u00eate a \u00e9t\u00e9 ajout\u00e9 sur le personnage "
-																																	+ perso5
-																																	+ ".");
+																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																													this.getClient(),
+																													"La qu\u00eate a \u00e9t\u00e9 ajout\u00e9 sur le personnage "
+																															+ perso5
+																															+ ".");
 																											return;
 																										} else if (command
 																												.equalsIgnoreCase(
@@ -3701,12 +3705,12 @@ public class CDefault extends Command {
 																											}
 																											if (id == -1
 																													|| perso5
-																															.equalsIgnoreCase(
-																																	"")) {
+																													.equalsIgnoreCase(
+																															"")) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Un des param\u00e8tres est invalide.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Un des param\u00e8tres est invalide.");
 																												return;
 																											}
 																											final Player p5 = World
@@ -3718,9 +3722,9 @@ public class CDefault extends Command {
 																											if (p5 == null
 																													|| q == null) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"La qu\u00eate ou le joueur est introuvable.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"La qu\u00eate ou le joueur est introuvable.");
 																												return;
 																											}
 																											final Quest.Quest_Perso qp = p5
@@ -3728,9 +3732,9 @@ public class CDefault extends Command {
 																															q);
 																											if (qp == null) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Le personnage n'a pas la qu\u00eate.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Le personnage n'a pas la qu\u00eate.");
 																												return;
 																											}
 																											for (final Quest_Etape e2 : q
@@ -3741,15 +3745,15 @@ public class CDefault extends Command {
 																														e2.getValidationType());
 																											}
 																											Database.getStatique()
-																													.getPlayerData()
-																													.update(p5,
-																															false);
+																											.getPlayerData()
+																											.update(p5,
+																													false);
 																											SocketManager
-																													.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																															this.getClient(),
-																															"La qu\u00eate a \u00e9t\u00e9 termin\u00e9 sur le personnage "
-																																	+ perso5
-																																	+ ".");
+																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																													this.getClient(),
+																													"La qu\u00eate a \u00e9t\u00e9 termin\u00e9 sur le personnage "
+																															+ perso5
+																															+ ".");
 																											return;
 																										} else if (command
 																												.equalsIgnoreCase(
@@ -3765,12 +3769,12 @@ public class CDefault extends Command {
 																											}
 																											if (id == -1
 																													|| perso5
-																															.equalsIgnoreCase(
-																																	"")) {
+																													.equalsIgnoreCase(
+																															"")) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Un des param\u00e8tres est invalide.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Un des param\u00e8tres est invalide.");
 																												return;
 																											}
 																											final Player p5 = World
@@ -3782,9 +3786,9 @@ public class CDefault extends Command {
 																											if (p5 == null
 																													|| q == null) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"La qu\u00eate ou le joueur est introuvable.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"La qu\u00eate ou le joueur est introuvable.");
 																												return;
 																											}
 																											final Quest.Quest_Perso qp = p5
@@ -3792,9 +3796,9 @@ public class CDefault extends Command {
 																															q);
 																											if (qp == null) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Le personnage n'a pas la qu\u00eate.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Le personnage n'a pas la qu\u00eate.");
 																												return;
 																											}
 																											for (final Quest_Etape e2 : q
@@ -3810,15 +3814,15 @@ public class CDefault extends Command {
 																												break;
 																											}
 																											Database.getStatique()
-																													.getPlayerData()
-																													.update(p5,
-																															false);
+																											.getPlayerData()
+																											.update(p5,
+																													false);
 																											SocketManager
-																													.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																															this.getClient(),
-																															"La qu\u00eate est pass\u00e9 \u00e0 l'\u00e9tape suivante sur le personnage "
-																																	+ perso5
-																																	+ ".");
+																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																													this.getClient(),
+																													"La qu\u00eate est pass\u00e9 \u00e0 l'\u00e9tape suivante sur le personnage "
+																															+ perso5
+																															+ ".");
 																											return;
 																										} else if (command
 																												.equalsIgnoreCase(
@@ -3832,9 +3836,9 @@ public class CDefault extends Command {
 																											}
 																											if (id == -1) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"Le param\u00e8tre est invalide.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"Le param\u00e8tre est invalide.");
 																												return;
 																											}
 																											final Quest q2 = Quest
@@ -3842,9 +3846,9 @@ public class CDefault extends Command {
 																															id);
 																											if (q2 == null) {
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																"La qu\u00eate est introuvable.");
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														"La qu\u00eate est introuvable.");
 																												return;
 																											}
 																											for (final Quest_Etape e3 : q2
@@ -3870,22 +3874,22 @@ public class CDefault extends Command {
 																																true);
 																													}
 																													SocketManager
-																															.GAME_SEND_Im_PACKET(
-																																	this.getPlayer(),
-																																	"021;" + qua2
-																																			+ "~"
-																																			+ objT.getId());
+																													.GAME_SEND_Im_PACKET(
+																															this.getPlayer(),
+																															"021;" + qua2
+																															+ "~"
+																															+ objT.getId());
 																													if (objT.getType() == 32) {
 																														this.getPlayer()
-																																.setMascotte(
-																																		entry12.getKey());
+																														.setMascotte(
+																																entry12.getKey());
 																													}
 																												}
 																											}
 																											SocketManager
-																													.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																															this.getClient(),
-																															"Vous avez re\u00e7u tous les items n\u00e9c\u00e9ssaire \u00e0 la qu\u00eate.");
+																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																													this.getClient(),
+																													"Vous avez re\u00e7u tous les items n\u00e9c\u00e9ssaire \u00e0 la qu\u00eate.");
 																											return;
 																										} else if (command
 																												.equalsIgnoreCase(
@@ -3903,9 +3907,9 @@ public class CDefault extends Command {
 																														+ sf.getId()
 																														+ ".";
 																												SocketManager
-																														.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																																this.getClient(),
-																																mess5);
+																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																														this.getClient(),
+																														mess5);
 																												return;
 																											}
 																											sf = new SchemaFight(
@@ -3920,9 +3924,9 @@ public class CDefault extends Command {
 																												mess5 = "Le SchemaFight n'a pas \u00e9t\u00e9 ajout\u00e9.";
 																											}
 																											SocketManager
-																													.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																															this.getClient(),
-																															mess5);
+																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																													this.getClient(),
+																													mess5);
 																											return;
 																										}
 																									}
@@ -3943,9 +3947,9 @@ public class CDefault extends Command {
 																				if (sf == null) {
 																					mess5 = "Le SchemaFight n'existe pas.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess5);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess5);
 																					return;
 																				}
 																				final int id2 = sf.getId();
@@ -3959,21 +3963,21 @@ public class CDefault extends Command {
 																							+ id2 + ".";
 																				}
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								mess5);
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						mess5);
 																			} else if (command.equalsIgnoreCase("MSF")
 																					&& (Config.config == 1
-																							|| Config.config == 5)) {
+																					|| Config.config == 5)) {
 																				String id3 = "";
 																				String id4 = "";
 																				String mess4 = "";
 																				if (infos.length <= 2) {
 																					mess4 = "Il manque les arguments.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess4);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess4);
 																					return;
 																				}
 																				id3 = infos[1];
@@ -3987,17 +3991,17 @@ public class CDefault extends Command {
 																				if (sf2 == null) {
 																					mess4 = "L'identifiant du premier SchemaFight est inexistant.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess4);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess4);
 																					return;
 																				}
 																				if (sf3 == null) {
 																					mess4 = "L'identifiant du second SchemaFight est inexistant.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess4);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess4);
 																					return;
 																				}
 																				final Map<Short, org.aestia.map.Map> Maps = World
@@ -4019,9 +4023,9 @@ public class CDefault extends Command {
 																								+ " a d\u00e9sormais le sch\u00e9ma d'id "
 																								+ sf3.getId() + ".";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess4);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess4);
 																					}
 																				}
 																			} else if (command.equalsIgnoreCase("SF")) {
@@ -4030,9 +4034,9 @@ public class CDefault extends Command {
 																				if (infos.length <= 1) {
 																					mess2 = "Il manque le premier argument.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess2);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess2);
 																					return;
 																				}
 																				id5 = infos[1];
@@ -4042,9 +4046,9 @@ public class CDefault extends Command {
 																				if (sf == null) {
 																					mess2 = "L'identifiant du SchemaFight est inexistant.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess2);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess2);
 																					return;
 																				}
 																				final Player perso2 = this.getPlayer();
@@ -4061,9 +4065,9 @@ public class CDefault extends Command {
 																						map5.setPlaces(oldSF);
 																						mess2 = "Le SchemaFight ne peux pas \u00eatre appliqu\u00e9 sur cette map : casebug.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess2);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess2);
 																						return;
 																					}
 																				}
@@ -4072,9 +4076,9 @@ public class CDefault extends Command {
 																						map5.setPlaces(oldSF);
 																						mess2 = "Le SchemaFight ne peux pas \u00eatre appliqu\u00e9 sur cette map : casebug.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess2);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess2);
 																						return;
 																					}
 																				}
@@ -4086,9 +4090,9 @@ public class CDefault extends Command {
 																					mess2 = "Impossible de modifier le SchemaFight de la map.";
 																				}
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								mess2);
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						mess2);
 																			} else if (command
 																					.equalsIgnoreCase("ISSF")) {
 																				String id5 = "";
@@ -4096,9 +4100,9 @@ public class CDefault extends Command {
 																				if (infos.length <= 1) {
 																					mess2 = "Il manque le premier argument";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess2);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess2);
 																					return;
 																				}
 																				id5 = infos[1];
@@ -4108,9 +4112,9 @@ public class CDefault extends Command {
 																				if (sf == null) {
 																					mess2 = "L'identifiant du SchemaFight est inexistant.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess2);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess2);
 																					return;
 																				}
 																				final Player perso2 = this.getPlayer();
@@ -4127,9 +4131,9 @@ public class CDefault extends Command {
 																						map5.setPlaces(oldSF);
 																						mess2 = "Le SchemaFight ne peux pas \u00eatre appliqu\u00e9 sur cette map : casebug.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess2);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess2);
 																						return;
 																					}
 																				}
@@ -4138,18 +4142,18 @@ public class CDefault extends Command {
 																						map5.setPlaces(oldSF);
 																						mess2 = "Le SchemaFight ne peux pas \u00eatre appliqu\u00e9 sur cette map : casebug.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess2);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess2);
 																						return;
 																					}
 																				}
 																				map5.setPlaces(oldSF);
 																				mess2 = "Il est possible de mettre ce SchemaFight sur la map.";
 																				SocketManager
-																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																								this.getClient(),
-																								mess2);
+																				.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																						this.getClient(),
+																						mess2);
 																			} else {
 																				if (command
 																						.equalsIgnoreCase("SHOWSF")) {
@@ -4160,21 +4164,21 @@ public class CDefault extends Command {
 																					for (final Map.Entry<Short, SchemaFight> entry14 : SchemaFights
 																							.entrySet()) {
 																						mess4 = "[" + entry14.getKey()
-																								+ "] "
-																								+ entry14.getValue()
-																										.getPlacesStr();
+																						+ "] "
+																						+ entry14.getValue()
+																						.getPlacesStr();
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess4);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess4);
 																						++i;
 																					}
 																					if (i == 0) {
 																						mess4 = "Il n'y a aucun SchemaFight.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess4);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess4);
 																					}
 																					return;
 																				}
@@ -4195,15 +4199,15 @@ public class CDefault extends Command {
 																								+ sf2.getId() + ".";
 																					}
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess4);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess4);
 																					return;
 																				}
 																				if (command
 																						.equalsIgnoreCase("DALLSFBUG")
 																						&& (Config.config == 1
-																								|| Config.config == 5)) {
+																						|| Config.config == 5)) {
 																					final Map<Short, org.aestia.map.Map> Maps2 = World
 																							.getMaps();
 																					int i = 0;
@@ -4217,13 +4221,13 @@ public class CDefault extends Command {
 																						if ((map6.getPlaces()
 																								.endsWith("|")
 																								|| map6.getPlaces()
-																										.startsWith(
-																												"|"))
+																								.startsWith(
+																										"|"))
 																								&& !map6.getPlaces()
-																										.equalsIgnoreCase(
-																												"|")
+																								.equalsIgnoreCase(
+																										"|")
 																								&& !map6.getMobGroups()
-																										.isEmpty()) {
+																								.isEmpty()) {
 																							final SchemaFight sf4 = new SchemaFight(
 																									"|");
 																							if (!World.updateMapPlaces(
@@ -4237,21 +4241,21 @@ public class CDefault extends Command {
 																									+ map6.getId()
 																									+ " a \u00e9t\u00e9 supprim\u00e9.";
 																							SocketManager
-																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																											this.getClient(),
-																											mess3);
+																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																									this.getClient(),
+																									mess3);
 																							++i;
 																						} else {
 																							if (map6.getId() == 2110
 																									|| map6.getW() != 15
 																									|| map6.getH() != 17
 																									|| map6.getMobGroups()
-																											.isEmpty()
+																									.isEmpty()
 																									|| map6.getPlaces()
-																											.equalsIgnoreCase(
-																													"|")
+																									.equalsIgnoreCase(
+																											"|")
 																									|| map6.getPlaces()
-																											.isEmpty()) {
+																									.isEmpty()) {
 																								continue;
 																							}
 																							case3 = CryptManager
@@ -4291,27 +4295,27 @@ public class CDefault extends Command {
 																									+ map6.getId()
 																									+ " a \u00e9t\u00e9 supprim\u00e9.";
 																							SocketManager
-																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																											this.getClient(),
-																											mess3);
+																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																									this.getClient(),
+																									mess3);
 																							++i;
 																						}
 																					}
 																					mess3 = "Au total, " + i
 																							+ "sch\u00e9mas de map ont \u00e9t\u00e9s supprim\u00e9s. Fin de la commande.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess3);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess3);
 																					return;
 																				}
 																				if (command.equalsIgnoreCase(
 																						"SHOWFIGHTPOS")) {
 																					String mess = "Liste des StartCell [teamID][cellID]:";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess);
 																					final String places = this
 																							.getPlayer().getCurMap()
 																							.getPlaces();
@@ -4319,9 +4323,9 @@ public class CDefault extends Command {
 																							|| places.length() < 2) {
 																						mess = "Les places n'ont pas ete definies";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess);
 																						return;
 																					}
 																					String team0 = "";
@@ -4343,14 +4347,14 @@ public class CDefault extends Command {
 																								.substring(a6, a6 + 2);
 																						mess = String.valueOf(mess)
 																								+ CryptManager
-																										.cellCode_To_ID(
-																												code)
+																								.cellCode_To_ID(
+																										code)
 																								+ ",";
 																					}
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess);
 																					mess = "Team 1 : ";
 																					for (int a6 = 0; a6 <= team2
 																							.length() - 2; a6 += 2) {
@@ -4358,14 +4362,14 @@ public class CDefault extends Command {
 																								.substring(a6, a6 + 2);
 																						mess = String.valueOf(mess)
 																								+ CryptManager
-																										.cellCode_To_ID(
-																												code)
+																								.cellCode_To_ID(
+																										code)
 																								+ ",";
 																					}
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess);
 																				} else if (command.equalsIgnoreCase(
 																						"ADDFIGHTPOS")) {
 																					int team3 = -1;
@@ -4380,17 +4384,17 @@ public class CDefault extends Command {
 																					if (team3 < 0 || team3 > 1) {
 																						final String str3 = "Team ou cellID incorects";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										str3);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								str3);
 																						return;
 																					}
 																					if (cell < 0
 																							|| this.getPlayer()
-																									.getCurMap()
-																									.getCase(
-																											cell) == null
-																							|| !this.getPlayer()
+																							.getCurMap()
+																							.getCase(
+																									cell) == null
+																									|| !this.getPlayer()
 																									.getCurMap()
 																									.getCase(cell)
 																									.isWalkable(true)) {
@@ -4433,27 +4437,27 @@ public class CDefault extends Command {
 																					}
 																					if (already) {
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										"La case est deja dans la liste");
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								"La case est deja dans la liste");
 																						return;
 																					}
 																					if (team3 == 0) {
 																						team4 = String.valueOf(team4)
 																								+ CryptManager
-																										.cellID_To_Code(
-																												cell);
+																								.cellID_To_Code(
+																										cell);
 																					} else if (team3 == 1) {
 																						team5 = String.valueOf(team5)
 																								+ CryptManager
-																										.cellID_To_Code(
-																												cell);
+																								.cellID_To_Code(
+																										cell);
 																					}
 																					final String newPlaces = String
 																							.valueOf(team4) + "|"
 																							+ team5;
 																					this.getPlayer().getCurMap()
-																							.setPlaces(newPlaces);
+																					.setPlaces(newPlaces);
 																					if (!Database.getStatique()
 																							.getMapData()
 																							.update(this.getPlayer()
@@ -4461,11 +4465,11 @@ public class CDefault extends Command {
 																						return;
 																					}
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Les places ont ete modifiees ("
-																											+ newPlaces
-																											+ ")");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Les places ont ete modifiees ("
+																									+ newPlaces
+																									+ ")");
 																				} else if (command.equalsIgnoreCase(
 																						"DELFIGHTPOS")) {
 																					int cell2 = -1;
@@ -4519,7 +4523,7 @@ public class CDefault extends Command {
 																						}
 																					}
 																					this.getPlayer().getCurMap()
-																							.setPlaces(newPlaces2);
+																					.setPlaces(newPlaces2);
 																					if (!Database.getStatique()
 																							.getMapData()
 																							.update(this.getPlayer()
@@ -4527,15 +4531,15 @@ public class CDefault extends Command {
 																						return;
 																					}
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Les places ont ete modifiees ("
-																											+ newPlaces2
-																											+ ")");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Les places ont ete modifiees ("
+																									+ newPlaces2
+																									+ ")");
 																				} else if (command.equalsIgnoreCase(
 																						"DELALLFIGHTPOS")) {
 																					this.getPlayer().getCurMap()
-																							.setPlaces("");
+																					.setPlaces("");
 																					if (!Database.getStatique()
 																							.getMapData()
 																							.update(this.getPlayer()
@@ -4543,13 +4547,13 @@ public class CDefault extends Command {
 																						return;
 																					}
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Les places ont ete mis a z\u00e9ro !");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Les places ont ete mis a z\u00e9ro !");
 																				} else if (command
 																						.equalsIgnoreCase("APPLYALEASF")
 																						&& (Config.config == 1
-																								|| Config.config == 5)) {
+																						|| Config.config == 5)) {
 																					final Map<Short, org.aestia.map.Map> Maps2 = World
 																							.getMaps();
 																					final Map<Short, SchemaFight> SchemaFights2 = World
@@ -4560,9 +4564,9 @@ public class CDefault extends Command {
 																					if (SchemaFights2.size() < 2) {
 																						mess4 = "Il n'y a pas assez de SchemaFight pour appliquer cette commande.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess4);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess4);
 																						return;
 																					}
 																					final Random random = new Random();
@@ -4579,13 +4583,13 @@ public class CDefault extends Command {
 																						if (map7.getW() == 15
 																								&& map7.getH() == 17
 																								&& !map7.getMobGroups()
-																										.isEmpty()) {
+																								.isEmpty()) {
 																							noSF = new ArrayList<Short>();
 																							if (!map7.getPlaces()
 																									.equalsIgnoreCase(
 																											"|")
 																									&& !map7.getPlaces()
-																											.isEmpty()) {
+																									.isEmpty()) {
 																								continue;
 																							}
 																							boolean b3 = false;
@@ -4596,9 +4600,9 @@ public class CDefault extends Command {
 																											+ map7.getId()
 																											+ ".";
 																									SocketManager
-																											.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																													this.getClient(),
-																													mess4);
+																									.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																											this.getClient(),
+																											mess4);
 																									listmap = String
 																											.valueOf(
 																													listmap)
@@ -4609,18 +4613,18 @@ public class CDefault extends Command {
 																								}
 																								final List<Short> keys = new ArrayList<Short>(
 																										SchemaFights2
-																												.keySet());
+																										.keySet());
 																								Short randomKey;
 																								for (randomKey = keys
 																										.get(random
 																												.nextInt(
 																														keys.size())), sf6 = World
-																																.getSchemaFight(
-																																		randomKey); sf6 == null
-																																				|| noSF.contains(
-																																						sf6.getId()); sf6 = World
-																																								.getSchemaFight(
-																																										randomKey)) {
+																														.getSchemaFight(
+																																randomKey); sf6 == null
+																																|| noSF.contains(
+																																		sf6.getId()); sf6 = World
+																																		.getSchemaFight(
+																																				randomKey)) {
 																									randomKey = keys
 																											.get(random
 																													.nextInt(
@@ -4668,9 +4672,9 @@ public class CDefault extends Command {
 																												+ map7.getId()
 																												+ ".";
 																										SocketManager
-																												.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																														this.getClient(),
-																														mess4);
+																										.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																												this.getClient(),
+																												mess4);
 																										++i3;
 																									} else {
 																										map7.setPlaces(
@@ -4693,13 +4697,13 @@ public class CDefault extends Command {
 																							+ y
 																							+ " maps n'ont pas eu de SchemaFight. Fin de la commande.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess4);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess4);
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									listmap);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							listmap);
 																				} else if (command.equalsIgnoreCase(
 																						"ADDMOBSUBAREA")) {
 																					String monsters = "";
@@ -4721,22 +4725,22 @@ public class CDefault extends Command {
 																									.equalsIgnoreCase(
 																											"")
 																									|| m2.getPlaces()
-																											.equalsIgnoreCase(
-																													"|")) {
+																									.equalsIgnoreCase(
+																											"|")) {
 																								m2.setMobPossibles("");
 																								Database.getStatique()
-																										.getMapData()
-																										.updateMonster(
-																												m2, "");
+																								.getMapData()
+																								.updateMonster(
+																										m2, "");
 																								++y2;
 																							} else {
 																								m2.setMobPossibles(
 																										monsters);
 																								Database.getStatique()
-																										.getMapData()
-																										.updateMonster(
-																												m2,
-																												monsters);
+																								.getMapData()
+																								.updateMonster(
+																										m2,
+																										monsters);
 																								++i4;
 																							}
 																							m2.refreshSpawns();
@@ -4746,16 +4750,16 @@ public class CDefault extends Command {
 																								+ y2
 																								+ "maps ont \u00e9t\u00e9s modifi\u00e9s sans monstres et refresh.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess2);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess2);
 																						return;
 																					}
 																					mess2 = "Il manque le premier argument.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess2);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess2);
 																				} else if (command.equalsIgnoreCase(
 																						"GSMOBSUBAREA")) {
 																					byte maxGroup = 0;
@@ -4788,13 +4792,13 @@ public class CDefault extends Command {
 																									.equalsIgnoreCase(
 																											"")
 																									|| m3.getPlaces()
-																											.equalsIgnoreCase(
-																													"|")) {
+																									.equalsIgnoreCase(
+																											"|")) {
 																								m3.setGs(def, def, def,
 																										def);
 																								Database.getStatique()
-																										.getMapData()
-																										.updateGs(m3);
+																								.getMapData()
+																								.updateGs(m3);
 																								++y3;
 																							} else {
 																								m3.setGs(maxGroup,
@@ -4802,8 +4806,8 @@ public class CDefault extends Command {
 																										fixSize,
 																										maxSize);
 																								Database.getStatique()
-																										.getMapData()
-																										.updateGs(m3);
+																								.getMapData()
+																								.updateGs(m3);
 																								++i5;
 																							}
 																							m3.refreshSpawns();
@@ -4813,16 +4817,16 @@ public class CDefault extends Command {
 																								+ y3
 																								+ " maps ont \u00e9t\u00e9s modifi\u00e9s \u00e0 -1 partout et refresh.";
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										mess8);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								mess8);
 																						return;
 																					}
 																					mess8 = "Il manque les arguments.";
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									mess8);
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							mess8);
 																				} else {
 																					if (command.equalsIgnoreCase(
 																							"FINDEXTRAMONSTER")) {
@@ -4848,15 +4852,15 @@ public class CDefault extends Command {
 																														+ " -> "
 																														+ idMob
 																														+ ".",
-																												Console.Color.YELLOW);
+																														Console.Color.YELLOW);
 																									}
 																								}
 																							}
 																						}
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										"Recherche termin\u00e9 et affich\u00e9 en console.");
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								"Recherche termin\u00e9 et affich\u00e9 en console.");
 																						return;
 																					}
 																					if (command.equalsIgnoreCase(
@@ -4882,20 +4886,20 @@ public class CDefault extends Command {
 																						} catch (Exception ex74) {
 																						}
 																						SocketManager
-																								.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																										this.getClient(),
-																										"subArea : "
-																												+ subArea3
-																												+ "\nArea : "
-																												+ area
-																												+ "\nsuperArea : "
-																												+ superArea);
+																						.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																								this.getClient(),
+																								"subArea : "
+																										+ subArea3
+																										+ "\nArea : "
+																										+ area
+																										+ "\nsuperArea : "
+																										+ superArea);
 																						return;
 																					}
 																					SocketManager
-																							.GAME_SEND_CONSOLE_MESSAGE_PACKET(
-																									this.getClient(),
-																									"Commande invalide !");
+																					.GAME_SEND_CONSOLE_MESSAGE_PACKET(
+																							this.getClient(),
+																							"Commande invalide !");
 																				}
 																			}
 																		}

@@ -545,12 +545,12 @@ public class Object {
 		if (this.getTemplate().getType() == 83) {
 			return this.getTemplate().getStrTemplate();
 		}
-		final StringBuilder stats = new StringBuilder();
 		if ((this.getTemplate().getPanoId() >= 81 && this.getTemplate().getPanoId() <= 92)
 				|| (this.getTemplate().getPanoId() >= 201 && this.getTemplate().getPanoId() <= 212)) {
-			stats.append(getTemplate().getStrTemplate());
-			return stats.toString();
+			//stats.append(getTemplate().getStrTemplate());
+			return this.getTemplate().getStrTemplate();
 		}
+		final StringBuilder stats = new StringBuilder();
 		boolean isFirst = true;
 		if (this instanceof Fragment) {
 			final Fragment fragment = (Fragment) this;
