@@ -589,6 +589,8 @@ public class ObjectTemplate {
 				return;
 			}
 			final SoulStone pierrePleine = (SoulStone) World.getObjet(objID);
+			//final Object object = World.getObjet(objID);
+			//final SoulStone pierrePleine = new SoulStone(object.guid, object.quantity, object.getTemplate().getId(), object.position, object.parseStatsString());
 			perso.getCurMap().spawnNewGroup(true, perso.getCurCell().getId(), pierrePleine.parseGroupData(),
 					"MiS=" + perso.getId());
 			SocketManager.GAME_SEND_Im_PACKET(perso, "022;1~" + World.getObjet(objID).getTemplate().getId());
