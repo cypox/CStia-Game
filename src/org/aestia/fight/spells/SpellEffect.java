@@ -3902,7 +3902,11 @@ public class SpellEffect {
 					continue;
 				}
 				Case eCell = this.cell;
-				if (Pathfinding.getDistanceBetween(fight.getMap(), this.caster.getCell().getId(), this.cell.getId()) > 1
+				int distance = 1;
+				if (this.spell == 128) {
+					distance = World.getSpells().get(this.spell).getStatsByLevel(this.spellLvl).getMaxPO();
+				}
+				if (Pathfinding.getDistanceBetween(fight.getMap(), this.caster.getCell().getId(), this.cell.getId()) > distance
 						&& target.getCell().getId() == this.cell.getId() && this.spell != 165) {
 					continue;
 				}
