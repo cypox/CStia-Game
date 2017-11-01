@@ -397,10 +397,12 @@ public class ObjectTemplate {
 			item = new org.aestia.object.Object(id, this.getId(), qua, -1,
 					this.generateNewStatsFromTemplate(this.getStrTemplate(), useMax),
 					this.getEffectTemplate(this.getStrTemplate()), Stats, new TreeMap<Integer, String>(), 0);
-		//} else if ( (panoId >= 81 && panoId <= 92) || (panoId >= 201 && panoId <= 212) ) {
+			//} else if ( (panoId >= 81 && panoId <= 92) || (panoId >= 201 && panoId <= 212) ) {
 			//item = new org.aestia.object.Object(id, this.getId(), qua, -1, new Stats(false, null),
 			//		new ArrayList<SpellEffect>(), new TreeMap<Integer, Integer>(), new TreeMap<Integer, String>(), 0);
 			//item.parseStringToStats(strTemplate);
+		} else if ( this.getType() == 85 ) {
+			return new SoulStone(id, qua, this.getId(), -1, this.generateSoulStoneStats(this.getStrTemplate(), useMax));
 		} else {
 			final Map<Integer, String> Stat = new TreeMap<Integer, String>();
 			switch (this.getType()) {
@@ -524,6 +526,42 @@ public class ObjectTemplate {
 			}
 		}
 		return itemStats;
+	}
+
+	private String generateSoulStoneStats(String strTemplate, boolean useMax) {
+		StringBuilder strStats = new StringBuilder();
+		
+		final String[] splitted = strTemplate.split(";");
+		String[] array;
+		boolean isFirst = true;
+		for (int length = (array = splitted).length, i = 0; i < length; ++i) {
+			final String s = array[i];
+			String[] mob = s.split(",");
+			try {
+				if (!isFirst) {
+					strStats.append("|");
+				}
+				final int mobID = Integer.parseInt(mob[0]);
+				final int minLevel = Integer.parseInt(mob[1]);
+				final int maxLevel = Integer.parseInt(mob[2]);
+				
+				strStats.append(mobID).append(",");
+				
+				if ( useMax ) {
+					strStats.append(maxLevel);
+				} else {
+					final int level = World.getMonstre(mobID).getRandomLevel(minLevel, maxLevel);
+					strStats.append(level);
+				}
+				isFirst = false;
+				
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return strStats.toString();
 	}
 
 	private ArrayList<SpellEffect> getEffectTemplate(final String statsTemplate) {

@@ -231,6 +231,17 @@ public class Monster {
 		}
 		return null;
 	}
+	
+	public int getRandomLevel(final int min, final int max) {
+		ArrayList<Integer> levels = new ArrayList<Integer>();
+		for (final Map.Entry<Integer, MobGrade> grade : this.getGrades().entrySet()) {
+			if ( grade.getValue().getLevel() >= min && grade.getValue().getLevel() <= max )
+				levels.add(grade.getValue().getLevel());
+		}
+		final float size = levels.size();
+		final int randomIndex = (int) (Math.random() * size);
+		return levels.get(randomIndex);
+	}
 
 	public static class MobGroup {
 		public static final MaitreCorbac MAITRE_CORBAC;
