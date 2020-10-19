@@ -59,7 +59,7 @@ public class Dbgame {
 
 	public boolean initializeConnection() {
 		try {
-			String url = "jdbc:mysql://" + Main.hostDB + "/" + Main.nameDB;
+			String url = "jdbc:mysql://" + Main.hostDB + "/" + Main.nameDB + "?serverTimezone=Europe/Paris";
 			this.connection = DriverManager.getConnection(url, Main.userDB, Main.passDB);
 			if (!connection.isValid(1000)) {
 				System.err.println("Pleaz check your username and password and database connection");

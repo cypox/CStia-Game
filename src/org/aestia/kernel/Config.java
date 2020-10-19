@@ -50,12 +50,12 @@ public class Config {
 		Main.exchangeIp = "127.0.0.1";
 		Main.loginHostDB = "127.0.0.1";
 		Main.loginNameDB = "cstia_game";
-		Main.loginUserDB = "root";
+		Main.loginUserDB = "cypox";
 		Main.loginPassDB = "Dexath";
 		Main.gamePort = 5555;
 		Main.hostDB = "127.0.0.1";
 		Main.nameDB = "cstia_other";
-		Main.userDB = "root";
+		Main.userDB = "cypox";
 		Main.passDB = "Dexath";
 		Main.Ip = "127.0.0.1";
 		this.onlyLocal = false;

@@ -176,7 +176,7 @@ public class Dbstatique {
 
 	public boolean initializeConnection() {
 		try {
-			String url = "jdbc:mysql://" + Main.loginHostDB + "/" + Main.loginNameDB;
+			String url = "jdbc:mysql://" + Main.loginHostDB + "/" + Main.loginNameDB + "?serverTimezone=Europe/Paris";
 			this.connection = DriverManager.getConnection(url, Main.loginUserDB, Main.loginPassDB);
 			if (!connection.isValid(1000)) {
 				System.err.println("Pleaz check your username and password and database connection");

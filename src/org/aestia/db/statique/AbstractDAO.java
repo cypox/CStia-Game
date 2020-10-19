@@ -44,7 +44,7 @@ public abstract class AbstractDAO<T> implements DAO<T> {
 		try {
 			if (!query.endsWith(";"))
 				query = query + ";";
-			Statement statement = connection.createStatement();
+			Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			resultSet = statement.executeQuery(query);
 		} catch (SQLException e) {
 			e.printStackTrace();

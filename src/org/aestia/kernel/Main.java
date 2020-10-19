@@ -65,7 +65,7 @@ public class Main {
 					WorldSave.cast(0);
 				}
 				Main.isRunning = false;
-				System.out.println("Le serveur est fermé !");
+				System.out.println("Le serveur est fermï¿½ !");
 			}
 		});
 		System.out.println("Lancement du serveur : "
